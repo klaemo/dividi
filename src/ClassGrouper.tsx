@@ -128,7 +128,7 @@ function ClassGrouper({
               class="w-12"
               type="number"
               value={numberOfGroups}
-              min={0}
+              min={2}
               onChange={(event) =>
                 setNumberOfGroups(parseInt(event.target.value))
               }
