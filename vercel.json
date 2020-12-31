@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*).js",
+      "source": "/(.*).(css|js)",
       "headers": [
         {
           "key": "Cache-Control",

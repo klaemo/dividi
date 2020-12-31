@@ -1,4 +1,5 @@
 import "preact/devtools";
+import "./index.css"
 import { h, render } from "preact";
 import { ClassGrouperApp } from "./ClassGrouper";
 
