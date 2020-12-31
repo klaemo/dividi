@@ -7,15 +7,28 @@ import {
   FennelResult,
 } from "./fennel";
 
-function Result({ result }: { result: FennelResult }) {
+function Result({
+  result,
+  onCancel,
+}: {
+  result: FennelResult;
+  onCancel: () => void;
+}) {
   return (
     <>
       {result.partions.map((group, index) => (
         <>
           <div class="mt-3 font-bold">Gruppe {index + 1}</div>
-          <div>{group.join(', ')}</div>
+          <div>{group.join(", ")}</div>
         </>
       ))}
+
+      <button
+        class="mt-3 text-indigo-600 hover:text-indigo-900"
+        onClick={onCancel}
+      >
+        Klasse bearbeiten
+      </button>
     </>
   );
 }
@@ -48,10 +61,14 @@ const initialData = [{ id: 1, contacts: [] }];
 
 function ClassGrouper({
   setResult,
+  data,
+  setData,
 }: {
   setResult: (result: FennelResult | null) => void;
+  data: StudentInformation[];
+  setData: (data: StudentInformation[]) => void;
 }) {
-  const [data, setData] = useState<StudentInformation[]>(initialData);
+  const [numberOfGroups, setNumberOfGroups] = useState(2);
   const isValid = data.every(
     (student) =>
       typeof student.id === "number" &&
@@ -63,7 +80,7 @@ function ClassGrouper({
       onSubmit={(event) => {
         event.preventDefault();
         console.time("running fennel");
-        const result = partitionClass(data);
+        const result = partitionClass(data, { k: numberOfGroups });
         // Some example output
         console.log("Groups:");
         console.log(result.partions);
@@ -103,31 +120,47 @@ function ClassGrouper({
         </table>
       </div>
 
-      <div class="flex justify-end mt-3">
-        <button
-          type="button"
-          class="mr-8"
-          onClick={() => setData(exampleClass)}
-        >
-          Beispieldaten laden
-        </button>
-        <button
-          type="button"
-          class="mr-8 text-red-600 hover:text-red-800"
-          onClick={() => {
-            setResult(null);
-            setData(initialData);
-          }}
-        >
-          Zurücksetzen
-        </button>
-        <button
-          type="submit"
-          class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow disabled:opacity-50"
-          disabled={!isValid}
-        >
-          Teilung ausführen
-        </button>
+      <div class="flex justify-between items-center mt-3">
+        <div>
+          <label>
+            <span class="pr-2">Gruppen:</span>
+            <input
+              class="w-12"
+              type="number"
+              value={numberOfGroups}
+              min={0}
+              onChange={(event) =>
+                setNumberOfGroups(parseInt(event.target.value))
+              }
+            ></input>
+          </label>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="mr-8"
+            onClick={() => setData(exampleClass)}
+          >
+            Beispieldaten laden
+          </button>
+          <button
+            type="button"
+            class="mr-8 text-red-600 hover:text-red-800"
+            onClick={() => {
+              setResult(null);
+              setData(initialData);
+            }}
+          >
+            Zurücksetzen
+          </button>
+          <button
+            type="submit"
+            class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow disabled:opacity-50"
+            disabled={!isValid}
+          >
+            Teilung berechnen
+          </button>
+        </div>
       </div>
     </form>
   );
@@ -135,10 +168,11 @@ function ClassGrouper({
 
 export function ClassGrouperApp() {
   const [result, setResult] = useState<FennelResult | null>(null);
+  const [data, setData] = useState<StudentInformation[]>(initialData);
 
   if (result === null) {
-    return <ClassGrouper setResult={setResult} />;
+    return <ClassGrouper data={data} setData={setData} setResult={setResult} />;
   }
 
-  return <Result result={result} />;
+  return <Result result={result} onCancel={() => setResult(null)} />;
 }
