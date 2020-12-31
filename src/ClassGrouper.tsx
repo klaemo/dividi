@@ -9,10 +9,8 @@ import {
 
 function Result({
   result,
-  onCancel,
 }: {
   result: FennelResult;
-  onCancel: () => void;
 }) {
   return (
     <>
@@ -22,13 +20,6 @@ function Result({
           <div>{group.join(", ")}</div>
         </>
       ))}
-
-      <button
-        class="mt-3 text-indigo-600 hover:text-indigo-900"
-        onClick={onCancel}
-      >
-        Klasse bearbeiten
-      </button>
     </>
   );
 }
@@ -170,9 +161,12 @@ export function ClassGrouperApp() {
   const [result, setResult] = useState<FennelResult | null>(null);
   const [data, setData] = useState<StudentInformation[]>(initialData);
 
-  if (result === null) {
-    return <ClassGrouper data={data} setData={setData} setResult={setResult} />;
-  }
-
-  return <Result result={result} onCancel={() => setResult(null)} />;
+  return (
+    <>
+      <ClassGrouper data={data} setData={setData} setResult={setResult} />
+      {result !== null && (
+        <Result result={result} />
+      )}
+    </>
+  );
 }
