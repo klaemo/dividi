@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2.5rem;
+  }
+
+  h2 {
+    @apply mb-3 font-bold text-2xl tracking-tighter;
+  }
+}
+
+@layer components {
+  .explainer a {
+    @apply text-indigo-600 hover:text-indigo-900;
+  }
+
+  .explainer summary {
+    @apply cursor-pointer py-1;
+  }
+
+  .explainer p {
+    @apply mt-2 mb-4;
+  }
+}
