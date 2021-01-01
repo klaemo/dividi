@@ -47,7 +47,7 @@ function Student({
   result: FennelResult | null;
 }) {
   const inputClasses =
-    "w-12 mr-2 border rounded border-gray-200 px-1 py-1 text-center focus:outline-none focus:ring focus:border-indigo-300";
+    "w-12 mr-2 border rounded border-gray-300 py-1 text-center focus:ring-indigo-300 focus:border-indigo-300";
   const color =
     result !== null ? PARTITION_COLORS[getPartitionIndex(result, id)] : "";
   const [nextIsFocused, setNextIsFocused] = useState(false);
@@ -69,6 +69,7 @@ function Student({
               result ? PARTITION_COLORS[getPartitionIndex(result, contact)] : ""
             }`}
             key={index}
+            type="text"
             inputMode="numeric"
             pattern="\d*"
             min="0"
@@ -95,6 +96,7 @@ function Student({
         <input
           ref={nextInput}
           class={inputClasses}
+          type="text"
           inputMode="numeric"
           pattern="\d*"
           min="0"
@@ -130,7 +132,7 @@ function Student({
         />
         {nextIsFocused && (
           <input
-            class={inputClasses}
+            class={`${inputClasses} pointer-events-none`}
             inputMode="numeric"
             pattern="\d*"
             min="0"
@@ -147,15 +149,17 @@ const initialData = [{ id: 1, contacts: [] }];
 function ClassGrouper({
   result,
   setResult,
-  data,
-  setData,
 }: {
   result: FennelResult | null;
   setResult: (result: FennelResult | null) => void;
-  data: StudentInformation[];
-  setData: (data: StudentInformation[]) => void;
 }) {
   const [numberOfGroups, setNumberOfGroups] = useState(2);
+  const [data, setData] = useState<StudentInformation[]>(() =>
+    Array.from({ length: 20 }, (v, index) => ({
+      id: index + 1,
+      contacts: [],
+    }))
+  );
   const allIds = data.map((student) => student.id);
   const isValid = data.every((student) => {
     return (
@@ -181,23 +185,7 @@ function ClassGrouper({
         setResult(result);
       }}
     >
-      <div class="sticky top-0 flex justify-between items-center p-3 bg-white">
-        <div>
-          <label>
-            <span class="pr-2">Gruppen:</span>
-            <input
-              class="w-12"
-              type="number"
-              value={numberOfGroups}
-              min={2}
-              onChange={(event) => {
-                if (event.target instanceof HTMLInputElement) {
-                  setNumberOfGroups(parseInt(event.target.value));
-                }
-              }}
-            ></input>
-          </label>
-        </div>
+      <div class="sticky top-0 flex justify-end items-center p-3 bg-white">
         <div class="flex">
           <button
             type="button"
@@ -226,60 +214,99 @@ function ClassGrouper({
         </div>
       </div>
 
-      <div class="shadow overflow-hidden border-b border-gray-200 rounded-md mt-2">
-        <table class="table-fixed min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th
-                scope="col"
-                class="w-1/6 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Schüler
-              </th>
-              <th
-                scope="col"
-                class="w-5/6 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Kontakte
-              </th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            {data.map((student, index) => (
-              <Student
-                key={student.id}
-                id={student.id}
-                result={result}
-                contacts={student.contacts}
-                onChange={(contacts) => {
-                  const newData = [...data];
-                  newData[index] = {
-                    ...newData[index],
-                    contacts,
-                  };
-                  setData(newData);
-                }}
-              />
-            ))}
+      <div class="md:flex">
+        <div class="md:w-1/3">
+          <h3 class="font-bold mb-4">1. Klasse anlegen</h3>
+          <label class="block mb-6">
+            <div class="pr-2 text-sm font-medium text-gray-700">
+              Wieviele Schüler sind in der Klasse?
+            </div>
+            <input
+              class="w-20 mt-1 rounded border border-gray-300 focus:outline-none focus:ring-indigo-300 focus:border-indigo-300"
+              type="number"
+              value={data.length}
+              min={2}
+              max={40}
+              onInput={(event) => {
+                if (event.target instanceof HTMLInputElement) {
+                  const newLength = parseInt(event.target.value);
 
-            <Student
-              key={data.length + 1}
-              id={data.length + 1}
-              result={result}
-              contacts={[]}
-              onChange={(contacts) => {
-                const newData = [
-                  ...data,
-                  {
-                    id: data.length + 1,
-                    contacts,
-                  },
-                ];
-                setData(newData);
+                  if (newLength < data.length) {
+                    setData(data.slice(0, newLength));
+                  } else if (newLength > data.length) {
+                    const newData = data.concat(
+                      Array.from(
+                        { length: newLength - data.length },
+                        (v, index) => ({
+                          id: data.length + index + 1,
+                          contacts: [],
+                        })
+                      )
+                    );
+                    setData(newData);
+                  }
+                }
               }}
-            />
-          </tbody>
-        </table>
+            ></input>
+          </label>
+
+          <label class="block mb-6">
+            <div class="pr-2 text-sm font-medium text-gray-700">
+              In wieviele Gruppen soll die Klasse geteilt werden?
+            </div>
+            <input
+              class="w-20 mt-1 rounded border border-gray-300 focus:outline-none focus:ring-indigo-300 focus:border-indigo-300"
+              type="number"
+              value={numberOfGroups}
+              min={2}
+              onChange={(event) => {
+                if (event.target instanceof HTMLInputElement) {
+                  setNumberOfGroups(parseInt(event.target.value));
+                }
+              }}
+            ></input>
+          </label>
+        </div>
+
+        <div class="md:ml-10 flex-grow md:w-2/3">
+          <h3 class="font-bold mb-4">2. Schüler eintragen</h3>
+          <table class="table-fixed min-w-full divide-y divide-gray-200 shadow overflow-hidden border-b border-gray-200 rounded-md ">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="w-1/6 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Schüler
+                </th>
+                <th
+                  scope="col"
+                  class="w-5/6 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Kontakte
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              {data.map((student, index) => (
+                <Student
+                  key={student.id}
+                  id={student.id}
+                  result={result}
+                  contacts={student.contacts}
+                  onChange={(contacts) => {
+                    const newData = [...data];
+                    newData[index] = {
+                      ...newData[index],
+                      contacts,
+                    };
+                    setData(newData);
+                  }}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </form>
   );
@@ -287,16 +314,10 @@ function ClassGrouper({
 
 export function ClassGrouperApp() {
   const [result, setResult] = useState<FennelResult | null>(null);
-  const [data, setData] = useState<StudentInformation[]>(initialData);
 
   return (
     <>
-      <ClassGrouper
-        data={data}
-        setData={setData}
-        setResult={setResult}
-        result={result}
-      />
+      <ClassGrouper setResult={setResult} result={result} />
       {result !== null && <Result result={result} />}
     </>
   );
