@@ -189,13 +189,6 @@ function ClassGrouper({
         <div class="flex">
           <button
             type="button"
-            class="mr-8 hover:text-gray-500"
-            onClick={() => setData(exampleClass)}
-          >
-            Beispieldaten laden
-          </button>
-          <button
-            type="button"
             class="mr-8 text-red-600 hover:text-red-800"
             onClick={() => {
               setResult(null);
@@ -266,6 +259,14 @@ function ClassGrouper({
               }}
             ></input>
           </label>
+
+          <button
+            type="button"
+            class="mr-8 font-medium text-gray-500 hover:text-gray-700 text-sm"
+            onClick={() => setData(exampleClass)}
+          >
+            Beispieldaten laden
+          </button>
         </div>
 
         <div class="md:ml-10 flex-grow md:w-2/3">
