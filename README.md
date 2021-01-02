@@ -21,3 +21,5 @@ The page will reload if you make edits.
 
 Builds a static copy of your site to the `build/` folder.
 Your app is ready to be deployed!
+
+> **Contributor Guidelines:** [CONTRIBUTING.md](./CONTRIBUTING.md) 
