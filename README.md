@@ -1,24 +1,23 @@
-# New Project
+# Klassenteiler
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+## Getting started
 
-## Available Scripts
+You will need to have [node.js](https://nodejs.org) installed on your machine to get started. The LTS version is recommended.
 
-### npm start
+Clone or download the source code of this repository on your machine, install the dependencies with `npm install` and start the development server with `npm start`.
+
+The project is written in [TypeScript](https://www.typescriptlang.org/), but don't worry about that, all valid JavaScript code is also TypeScript code.
+
+### Available Scripts
+
+#### npm start
 
 Runs the app in the development mode.
 Open http://localhost:8080 to view it in the browser.
 
 The page will reload if you make edits.
-You will also see any lint errors in the console.
 
-### npm run build
+#### npm run build
 
 Builds a static copy of your site to the `build/` folder.
 Your app is ready to be deployed!
-
-**For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.json` config file.
-
-### Q: What about Eject?
-
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
