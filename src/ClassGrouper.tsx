@@ -31,6 +31,9 @@ function Result({ result }: { result: FennelResult }) {
           <div>{group.join(", ")}</div>
         </>
       ))}
+      <div className="mt-3">
+        Es gibt <strong>{result.minCutSize}</strong> Kontakte zwischen den Gruppen.
+      </div>
     </>
   );
 }
