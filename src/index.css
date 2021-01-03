@@ -11,11 +11,23 @@
   h2 {
     @apply mb-3 font-bold text-2xl tracking-tighter;
   }
+
+  ol {
+    @apply list-decimal list-outside;
+  }
+
+  ol li {
+    @apply mb-2;
+  }
 }
 
 @layer components {
   .explainer a {
     @apply text-indigo-600 hover:text-indigo-900;
+  }
+
+  .explainer ul {
+    @apply list-disc list-inside;
   }
 
   .explainer summary {

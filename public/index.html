@@ -13,18 +13,18 @@
         <h1
           class="text-center text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
         >
-          Klassenteiler
+          Dividi
         </h1>
         <p
           class="mt-3 text-base text-center text-gray-500 md:mt-5 md:text-xl max-w-xl mx-auto"
         >
-          Wechselunterricht mit aufgeteilten Klassen ist herausfordernd für
-          alle. Ein Schlüssel dazu liegt schon im Aufteilen der Klasse in
-          Kohorten. Dabei sollten möglichst wenige Freundschaften geteilt werden
-          – sowohl aus epidemiologischer Sicht wie auch um Akzeptanz und
-          Wohlbefinden bei den Schülern zu fördern. Diese Seite bietet eine
-          einfache Möglichkeit, eine solche möglichst optimale Teilung zu
-          erreichen.
+          Dividi hilft dabei, größere Gruppen wie zum Beispiel Schulklassen in
+          kleinere Gruppen zu teilen, ohne dabei Freundschaften und andere
+          Kontakte zu zerschneiden. So wird Wechselunterricht in geteilten
+          Klassen im Rahmen der COVID-19-Pandemie für Schüler und Eltern
+          akzeptabler und nachvollziehbarer, und zugleich effektiver im
+          Verringern von Einschleppungen von Infektionen und darauf folgenden
+          Quarantäne-Zeiten.
         </p>
         <div class="mt-3 sm:flex justify-center mx-auto md:mt-5">
           <a
@@ -40,16 +40,34 @@
         </div>
       </header>
 
-      <section
-        id="teiler"
-        class="mx-auto max-w-screen-xl mt-10 px-5"
-      >
-        <h2>Überschrift</h2>
-        <p class="text-gray-500 max-w-2xl">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga placeat
-          officiis esse earum excepturi dolores nisi, non illum amet enim facere
-          aut praesentium laudantium! Officiis totam praesentium corporis ea et?
-        </p>
+      <section id="teiler" class="mx-auto max-w-screen-xl mt-10 px-5">
+        <h2>Schritt-für-Schritt-Erklärung</h2>
+        <ol class="text-gray-500 max-w-2xl">
+          <li>
+            Alle Kinder einer Klasse erhalten eine fortlaufende Nummer, z.B.
+            anhand der Klassenliste.
+          </li>
+          <li>
+            Die Schüler*innen werden darum gebeten, ihre engsten Kontakte
+            aufzulisten. Gerne mithilfe unseres [Vorducks für Kontaktlisten],
+            aber eine einfache Liste mit der eigenen Nummer und der Nummern der
+            Kontakte reicht genauso.
+          </li>
+          <li>
+            Schulleitung, Lehrkräfte oder Klassensprecher*innen sammeln die
+            erstellten Kontaktlisten ein.
+          </li>
+          <li>
+            Die Kontaktlisten werden in dieser WebApp eingetragen, wenn
+            gewünscht weitere Einstellungen getätigt und die Berechnung
+            gestartet.
+          </li>
+          <li>
+            Die WebApp gibt sofort ein Ergebnis aus, wie eine Teilung der Klasse
+            aussehen könnte, die möglichst viele außerschulische Kontakte
+            vermeidet.
+          </li>
+        </ol>
         <div id="klassenteiler-app"></div>
       </section>
 
@@ -57,63 +75,164 @@
         id="explainer"
         class="explainer mx-auto max-w-screen-xl mt-10 px-5"
       >
-        <h2>Was ist das?</h2>
+        <h2>FAQ</h2>
         <div class="max-w-2xl">
           <details open>
+            <summary>Worum geht es?</summary>
+            <p>
+              Diese Anwendung teilt eine gegebene Klasse so auf, dass in etwa
+              gleich große Gruppen entstehen, zwischen denen möglichst wenige
+              Kontakte bestehen. Die Anzahl der Gruppen und der maximale
+              Unterschied zwischen den Gruppengrößen kann individuell festgelegt
+              werden.
+            </p>
+          </details>
+
+          <details>
             <summary>Warum machen wir das?</summary>
             <p>
               Wechselunterricht mit aufgeteilten Klassen ist herausfordernd für
               alle. Da sollte die damit verbundene Mühe zumindest so viel wie
-              möglich bringen. Ein Schlüssel dazu liegt nicht in der
-              Unterrichtsgestaltung, sondern schon im Aufteilen der Klasse in
-              Kohorten. Dabei sollten möglichst wenige Freundschaften geteilt
-              werden – sowohl aus epidemiologischer Sicht wie auch um Akzeptanz
-              und Wohlbefinden bei den Schülern zu fördern. Denn Sinn der
-              Teilung ist ja eine Reduktion der Kontaktnetzwerke, da bringt es
-              wenig, wenn sich die Schüler aus zwei Kohorten nachmittags wieder
-              in Verein oder Freizeit treffen und so das Virus doch wieder einen
-              weg von einer in die andere Kohorte findet. Eine Klassenteilung,
-              die schon natürlich auf möglichst wenig außerschulische Kontakte
-              zwischen den Kohorten abzielt, reduziert so Quarantänezeiten wie
-              Infektionen und ermöglicht so mehr Unterricht, eine schnellere
-              Rückkehr zum Regelunterricht und schlicht weniger schwere
-              Krankheitsverläufe in den Familien.
+              möglich bringen. Ein Schlüssel dazu liegt neben der
+              Unterrichtsgestaltung schon im Aufteilen der Klassen. Dabei
+              sollten möglichst wenige Freundschaften geteilt werden – sowohl
+              aus epidemiologischer Sicht, wie auch um Akzeptanz und
+              Wohlbefinden bei den Schülern zu fördern. Denn Sinn der Teilung
+              ist ja eine Verkleinerung der Kontaktnetzwerke, da wäre es wenig
+              sinnvoll, wenn sich die Schüler aus verschiedenen Gruppen
+              nachmittags wieder in Vereinen oder zu Hause treffen. Das Virus
+              würde so doch wieder einen Weg von einer in die andere Kohorte
+              findet. Eine gute Klassenteilung sollte daher auf möglichst wenige
+              außerschulische Kontakte zwischen den Gruppen abzielen. So werden:
             </p>
+            <ul>
+              <li>
+                Einschleppungen von Infektionen und Quarantäne-Zeiten verringert
+              </li>
+              <li>
+                mehr Unterricht und eine schnellere Rückkehr zum Regelunterricht
+                ermöglicht und
+              </li>
+              <li>
+                schwere Krankheitsverläufe in den Familien schlicht
+                unwahrscheinlicher.
+              </li>
+            </ul>
+
             <p>
               Netzwerkforscher haben bereits genauer untersucht, wie groß der
-              Effekt von Klassenteilungen generell ist, und wie sehr er durch
-              möglichst
+              Effekt von Klassenteilungen generell ist, und wie sehr dieser
+              durch möglichst optimale Teilungen nochmals gesteigert werden
+              kann. Klar ist, der deutlich größte Effekt wird durch die Teilung
+              an sich erzielt. Aber je besser außerschulische Kontakte dabei
+              verhindert werden, desto effektiver wird die Teilung. Diese Seite
+              bietet eine einfache Möglichkeit, eine solche möglichst optimale
+              Teilung zu erreichen.
+            </p>
+          </details>
+
+          <details>
+            <summary>Welche Daten werden benötigt?</summary>
+            <p>
+              Um die Klasse einzuteilen, werden Kontaktlisten der Schüler
+              benötigt. Jeder Schüler wird dabei durch eine Nummer 1, 2, 3 usw.
+              repräsentiert, z.b. anhand der Klassenliste. Jeder Schüler
+              schreibt daraufhin die Nummern der Schüler auf, mit welchen er
+              auch außerhalb der Schule Kontakt hat - die Kontaktliste. Die
+              Reihenfolgen sind für das Ergebnis unwichtig. Selbst- und
+              Mehrfachnennungen werden ignoriert.
+            </p>
+            <p>
+              Beispiel: Schüler 2 hat mit Schülern 3, 5 und 9 Kontakt. Die Liste
+              von Schüler 2 sieht dann so aus: 2: 3, 5, 9 (oder eine andere
+              Reihenfolge wie z.B. 2: 5, 9, 3)
+            </p>
+          </details>
+
+          <details>
+            <summary>Was sind Kontakte?</summary>
+            <p>
+              Die genaue Definition von einem Kontakt liegt im Ermessen des
+              Lehrers (oder der Vertrauensperson). Ein Kontakt kann zum Beispiel
+              bestehen, wenn sich zwei Schüler außerhalb der Schule treffen oder
+              auch wenn sie einfach nur befreundet sind. Wichtig ist aber, dass
+              alle Schüler der gleichen Definition folgen, wenn sie ihre
+              Kontaktlisten anlegen.
+            </p>
+          </details>
+          <details>
+            <summary>Wie sieht es mit Datenschutz aus?</summary>
+            <p>
+              Die Auswertung findet komplett lokal statt. Die Daten verlassen
+              also euren Rechner nicht.
+            </p>
+          </details>
+          <details>
+            <summary>Müssen wir uns an das Ergebnis halten?</summary>
+            <p>
+              Nein. Beim Teilen von Klassen können noch viele andere Faktoren
+              eine Rolle spielen, die nicht mit dem formalen Regelwerk eines
+              Computers erfasst werden können (oder sollten). Die berechnete
+              Gruppeneinteilung kann dabei helfen Übersicht zu schaffen, sollte
+              aber nicht als Endergebnis hingenommen werden.
+            </p>
+          </details>
+          <details>
+            <summary>Wie gut ist die Aufteilung?</summary>
+            <p>
+              Das zugrunde liegende mathematische Problem hat keine
               <a
-                href="https://www.medrxiv.org/content/10.1101/2020.11.30.20241166v1"
-                target="_blank"
+                href="https://en.wikipedia.org/wiki/Graph_partition#Problem_complexity"
                 rel="noopener"
-                >optimale Teilungen</a
+                target="_blank"
               >
-              nochmals gesteigert werden kann. Klar ist, der deutlich größte
-              Effekt wird durch das Teilen an sich erzielt, aber je besser
-              außerschulische Kontakte beachtet werden, desto effektiver wird
-              die Teilung. Diese Seite bietet eine einfache Möglichkeit, eine
-              solche möglichst optimale Teilung zu erreichen.
+                theoretisch garantierte optimale Lösung</a
+              >, also eine Aufteilung, die in jedem Fall zu der kleinstmöglichen
+              Anzahl an Kontakten zwischen den Gruppen führt. In der Praxis sind
+              unsere Ergebnisse allerdings fast immer äußerst nahe an den
+              optimalen Werten. Für optimale Lösungen und sehr große Klassen
+              empfehlen wir professionelle Programme wie
+              <a href="https://kahip.github.io/" rel="noopener" target="_blank"
+                >KaHIP</a
+              >.
             </p>
           </details>
-
           <details>
-            <summary>Wer steckt dahinter?</summary>
+            <summary>Was passiert im Hintergrund?</summary>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              quaerat fugit quos optio culpa quod dolor sunt tenetur saepe quam
-              ab iste, eum debitis explicabo placeat excepturi minus natus
-              soluta.
+              Der unterliegende Algorithmus basiert auf
+              <a
+                href="https://dl.acm.org/doi/abs/10.1145/2556195.2556213"
+                rel="noopener"
+                target="_blank"
+                >Fennel</a
+              >, einer Heuristik für
+              <a
+                href="https://en.wikipedia.org/wiki/Graph_partition"
+                rel="noopener"
+                target="_blank"
+                >Graph Partitioning</a
+              >. Um das Ergebnis zu verbessern, wird Fennel mehrfach mit
+              zufällig gewählter Reihenfolge der Schüler ausgeführt. Bei
+              mehreren ähnlich guten Möglichkeiten für eine Aufteilung kann es
+              so auch passieren, dass eine wiederholte Berechnung zu
+              verschiedenen Ergebnisse führt, die alle etwa gleichwertig sind.
             </p>
           </details>
-
           <details>
-            <summary>Was passiert mit den Daten?</summary>
+            <summary>Werden gegenseitige Kontakte doppelt gewichtet?</summary>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              quaerat fugit quos optio culpa quod dolor sunt tenetur saepe quam
-              ab iste, eum debitis explicabo placeat excepturi minus natus
-              soluta.
+              Nein. Die Anwendung geht davon aus, dass ein Kontakt zwischen zwei
+              Schülern besteht, sobald mindestens einer der beiden angegeben hat
+              den anderen zu sehen.
+            </p>
+          </details>
+          <details>
+            <summary>Will damit irgendwer Geld verdienen?</summary>
+            <p>
+              Nein. Die Entwicklung erfolgte in unserer Freizeit, die Anwendung
+              ist frei nutzbar und es gibt kein Bestreben mit der WebApp Geld zu
+              verdienen.
             </p>
           </details>
         </div>
