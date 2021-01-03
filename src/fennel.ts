@@ -71,11 +71,15 @@ export function partitionClass(
   // ints. The vertices are labelled 0,1,2,.... So if G is a graph, then
   // G[v] is the array of neighbours of vertex v.
   // Convert Class of students to a directed (multi) graph (with loops)
-  const D = convertClassToGraph(students); // O(n+m) operations
+  const D = convertClassToDirectedGraph(students); // O(n+m) operations
   console.log("Derived directed multigraph with loops:");
   console.log(D);
+  // run some basic checks on the input
+  const E: number[][] = checkDirectedGraph(D);
+  console.log("Vertices with a self-loop:", E[0]);
+  console.log("Vertices with parallel edges:", E[1]);
   // Turn D into a simple graph G
-  const G = simplifyGraph(D); // O(n^2) operations
+  const G = convertDirectedGraphToGraph(D); // O(n^2) operations
   console.log("Derived simple graph:");
   console.log(G);
 
@@ -138,13 +142,13 @@ export function partitionClass(
  * @param students double array of Persons GRP: adjacency lists of directed graph
  * @returns adjacency lists of (directed) graph
  */
-function convertClassToGraph(students: StudentInformation[]): number[][] {
+function convertClassToDirectedGraph(students: StudentInformation[]): number[][] {
   // Running time: O(n+m)
   // Note input student ids are 1,...,n whereas output indices are
   // 0,...,n-1. Also, Students need not be sorted by id.
   var n = students.length;
   var G = new Array(n);
-  for (let i = 0; i < students.length; i++) {
+  for (let i = 0; i < n; i++) {
     const student = students[i]; // student
     const v = student.id - 1;
     G[v] = [];
@@ -156,9 +160,52 @@ function convertClassToGraph(students: StudentInformation[]): number[][] {
 
 /**
  * @param D double array of integers D: adjacency lists of directed graph
+ * @returns double array of numbers E:
+ * E[0]: list of vertices with a self-loop
+ * E[1]: list of vertices with parallel edges
+*/
+function checkDirectedGraph(D: number[][]): number[][] {
+  // Running time: O(n^2)
+
+  var n = D.length;
+
+  // Create adjacency matrix M.
+  var M = new Array(n);
+  for (let v = 0; v < n; v++) {
+    M[v] = new Array(n);
+    for (let w = 0; w < n; w++) M[v][w] = 0;
+  }
+  for (let v = 0; v < n; ++v) {
+    var d = D[v].length; // degree of vertex v
+
+    for (let j = 0; j < d; ++j) {
+      var w = D[v][j]; // neighbour of vertex v
+      M[v][w]++;
+    }
+  }
+  
+  
+  const E: number[][] = [[],[]];
+  // Search for self-loops
+  for (let v = 0; v < n; v++) {
+    if (M[v][v] > 0) E[0].push(v);
+  }  
+  
+  // Search for repeated edges
+  for (let v = 0; v < n; v++) {
+    for (let w = 0; w < n; w++) {
+      if (M[v][w] > 1) E[1].push(v); 
+    }
+  }
+
+  return E;
+}
+
+/**
+ * @param D double array of integers D: adjacency lists of directed graph
  * @returns double array of integers G_simple: adjacency lists of the corresponding simple graph
  */
-function simplifyGraph(D: number[][]): number[][] {
+function convertDirectedGraphToGraph(D: number[][]): number[][] {
   // Running time: O(n^2)
 
   var n = D.length;
