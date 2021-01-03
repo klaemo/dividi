@@ -149,17 +149,18 @@ function Student({
   );
 }
 
-function generateInitialData(): StudentInformation[] {
-  return Array.from({ length: 20 }, (v, index) => ({
+const initialData: StudentInformation[] = Array.from(
+  { length: 20 },
+  (_, index) => ({
     id: index + 1,
     contacts: [],
-  }));
-}
+  })
+);
 
 export function ClassGrouperApp() {
   const [result, setResult] = useState<FennelResult | null>(null);
   const [numberOfGroups, setNumberOfGroups] = useState(2);
-  const [data, setData] = useState<StudentInformation[]>(generateInitialData);
+  const [data, setData] = useState<StudentInformation[]>(initialData);
   const allIds = data.map((student) => student.id);
   const isValid = data.every((student) => {
     return (
@@ -184,16 +185,18 @@ export function ClassGrouperApp() {
     >
       <div class="sticky top-0 flex justify-end items-center p-3 bg-white">
         <div class="flex">
-          <button
-            type="button"
-            class="mr-4 sm:mr-8 text-red-600 hover:text-red-800"
-            onClick={() => {
-              setResult(null);
-              setData(generateInitialData());
-            }}
-          >
-            Zurücksetzen
-          </button>
+          {data !== initialData && (
+            <button
+              type="button"
+              class="mr-4 sm:mr-8 text-red-600 hover:text-red-800"
+              onClick={() => {
+                setResult(null);
+                setData(initialData);
+              }}
+            >
+              Zurücksetzen
+            </button>
+          )}
           <button
             type="submit"
             class="flex items-center justify-center px-4 sm:px-8 py-3 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow disabled:opacity-50"
