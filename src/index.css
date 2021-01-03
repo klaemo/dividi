@@ -21,7 +21,7 @@
   } */
 
   ol {
-    @apply list-decimal list-outside;
+    @apply list-decimal list-outside ml-5;
   }
 
   ol li {

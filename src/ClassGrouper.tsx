@@ -62,7 +62,7 @@ function Student({
       >
         {id}
       </td>
-      <td class="px-6 py-2 whitespace-nowrap">
+      <td class="px-6 py-2 whitespace-nowrap flex items-center">
         {contacts.map((contact, index) => (
           <input
             class={`${inputClasses} ${
@@ -189,7 +189,7 @@ function ClassGrouper({
         <div class="flex">
           <button
             type="button"
-            class="mr-8 text-red-600 hover:text-red-800"
+            class="mr-4 sm:mr-8 text-red-600 hover:text-red-800"
             onClick={() => {
               setResult(null);
               setData(initialData);
@@ -199,7 +199,7 @@ function ClassGrouper({
           </button>
           <button
             type="submit"
-            class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow disabled:opacity-50"
+            class="flex items-center justify-center px-4 sm:px-8 py-3 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow disabled:opacity-50"
             disabled={!isValid}
           >
             Teilung berechnen
@@ -207,8 +207,8 @@ function ClassGrouper({
         </div>
       </div>
 
-      <div class="md:flex">
-        <div class="md:w-1/3">
+      <div class="lg:flex">
+        <div class="lg:w-1/3">
           <h3 class="font-bold mb-4">1. Klasse anlegen</h3>
           <label class="block mb-6">
             <div class="pr-2 text-sm font-medium text-gray-700">
@@ -265,11 +265,11 @@ function ClassGrouper({
             class="mr-8 font-medium text-gray-500 hover:text-gray-700 text-sm"
             onClick={() => setData(exampleClass)}
           >
-            Beispieldaten laden
+            Mit Beispieldaten ausprobieren
           </button>
         </div>
 
-        <div class="md:ml-10 flex-grow md:w-2/3">
+        <div class="mt-5 lg:mt-0 lg:ml-10 flex-grow lg:w-2/3">
           <h3 class="font-bold mb-4">2. Schüler eintragen</h3>
           <table class="table-fixed min-w-full divide-y divide-gray-200 shadow overflow-hidden border-b border-gray-200 rounded-md ">
             <thead class="bg-gray-50">
