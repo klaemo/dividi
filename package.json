@@ -8,6 +8,7 @@
     "@snowpack/plugin-postcss": "^1.0.11",
     "@snowpack/plugin-webpack": "^2.2.0",
     "@tailwindcss/forms": "^0.2.1",
+    "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^10.1.0",
     "cssnano": "^4.1.10",
     "postcss": "^8.2.2",
