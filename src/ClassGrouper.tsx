@@ -9,11 +9,11 @@ import {
 
 /** Experimental highlight colors for the partitions */
 const PARTITION_COLORS = [
-  "text-green-500",
   "text-blue-500",
-  "text-pink-500",
-  "text-yellow-500",
+  "text-green-500",
   "text-purple-500",
+  "text-yellow-500",
+  "text-pink-500",
 ];
 
 function getPartitionIndex(result: FennelResult, id: number) {
@@ -23,6 +23,7 @@ function getPartitionIndex(result: FennelResult, id: number) {
 function Result({ result }: { result: FennelResult }) {
   return (
     <>
+      <h3 class="font-bold mb-4">Vorgeschlagene Teilung der Klasse</h3>
       {result.partions.map((group, index) => (
         <>
           <div class={`mt-3 font-bold ${PARTITION_COLORS[index]}`}>
@@ -32,7 +33,8 @@ function Result({ result }: { result: FennelResult }) {
         </>
       ))}
       <div className="mt-3">
-        Es gibt <strong>{result.minCutSize}</strong> Kontakte zwischen den Gruppen.
+        Es gibt <strong>{result.minCutSize}</strong> Kontakte zwischen den
+        Gruppen.
       </div>
     </>
   );
@@ -147,22 +149,17 @@ function Student({
   );
 }
 
-const initialData = [{ id: 1, contacts: [] }];
+function generateInitialData(): StudentInformation[] {
+  return Array.from({ length: 20 }, (v, index) => ({
+    id: index + 1,
+    contacts: [],
+  }));
+}
 
-function ClassGrouper({
-  result,
-  setResult,
-}: {
-  result: FennelResult | null;
-  setResult: (result: FennelResult | null) => void;
-}) {
+export function ClassGrouperApp() {
+  const [result, setResult] = useState<FennelResult | null>(null);
   const [numberOfGroups, setNumberOfGroups] = useState(2);
-  const [data, setData] = useState<StudentInformation[]>(() =>
-    Array.from({ length: 20 }, (v, index) => ({
-      id: index + 1,
-      contacts: [],
-    }))
-  );
+  const [data, setData] = useState<StudentInformation[]>(generateInitialData);
   const allIds = data.map((student) => student.id);
   const isValid = data.every((student) => {
     return (
@@ -177,8 +174,12 @@ function ClassGrouper({
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        const result = partitionClass(data, { k: numberOfGroups });
-        setResult(result);
+        try {
+          const result = partitionClass(data, { k: numberOfGroups });
+          setResult(result);
+        } catch (error) {
+          console.error(error);
+        }
       }}
     >
       <div class="sticky top-0 flex justify-end items-center p-3 bg-white">
@@ -188,7 +189,7 @@ function ClassGrouper({
             class="mr-4 sm:mr-8 text-red-600 hover:text-red-800"
             onClick={() => {
               setResult(null);
-              setData(initialData);
+              setData(generateInitialData());
             }}
           >
             Zurücksetzen
@@ -204,7 +205,7 @@ function ClassGrouper({
       </div>
 
       <div class="lg:flex">
-        <div class="lg:w-1/3">
+        <div class="lg:w-1/3 lg:sticky top-6 self-start">
           <h3 class="font-bold mb-4">1. Klasse anlegen</h3>
           <label class="block mb-6">
             <div class="pr-2 text-sm font-medium text-gray-700">
@@ -256,13 +257,17 @@ function ClassGrouper({
             ></input>
           </label>
 
-          <button
-            type="button"
-            class="mr-8 font-medium text-gray-500 hover:text-gray-700 text-sm"
-            onClick={() => setData(exampleClass)}
-          >
-            Mit Beispieldaten ausprobieren
-          </button>
+          {!result && (
+            <button
+              type="button"
+              class="mr-8 font-medium text-gray-500 hover:text-gray-700 text-sm"
+              onClick={() => setData(exampleClass)}
+            >
+              Mit Beispieldaten ausprobieren
+            </button>
+          )}
+
+          {result !== null && <Result result={result} />}
         </div>
 
         <div class="mt-5 lg:mt-0 lg:ml-10 flex-grow lg:w-2/3">
@@ -306,16 +311,5 @@ function ClassGrouper({
         </div>
       </div>
     </form>
-  );
-}
-
-export function ClassGrouperApp() {
-  const [result, setResult] = useState<FennelResult | null>(null);
-
-  return (
-    <>
-      <ClassGrouper setResult={setResult} result={result} />
-      {result !== null && <Result result={result} />}
-    </>
   );
 }
