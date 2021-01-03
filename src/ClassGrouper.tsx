@@ -177,14 +177,7 @@ function ClassGrouper({
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        console.time("running fennel");
         const result = partitionClass(data, { k: numberOfGroups });
-        // Some example output
-        console.log("Groups:");
-        console.log(result.partions);
-        console.log("Number of crossing contacts:");
-        console.log(result.minCutSize);
-        console.timeEnd("running fennel");
         setResult(result);
       }}
     >
