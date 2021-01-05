@@ -31,7 +31,7 @@ export function StudentRow({
   const lastInputRef = useRef<HTMLInputElement>();
 
   return (
-    <tr>
+    <tr class="focus-within:bg-indigo-50">
       <td
         class={`px-6 py-2 whitespace-nowrap ${color}`}
         aria-label="Schüler ID"
