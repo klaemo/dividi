@@ -23,14 +23,9 @@
         <p
           class="mt-3 md:mt-5 text-base text-center text-gray-500 md:text-xl max-w-xl mx-auto"
         >
-          Dividi ermöglicht es Schulklassen in kleinere Gruppen 
-          einzuteilen, so dass dabei möglichst wenige Freundschaften und 
-          Kontakte getrennt werden. So wird Wechselunterricht in 
-          geteilten Klassen im Rahmen der COVID-19-Pandemie für Schüler 
-          und Eltern akzeptabler und nachvollziehbarer. Darüber hinaus 
-          kann eine gute Einteilung auch die Effektivität von 
-          Wechselunterricht im Bezug auf die Ausbreitung der Pandemie 
-          erhöhen.
+          Diese Website hilft dabei Schulklassen für Wechselunterricht in gleich große 
+          Gruppen einzuteilen, so dass möglichst wenige Freundschaften 
+          und Kontakte getrennt werden.
         </p>
         <div class="mt-3 md:mt-5 sm:flex justify-center mx-auto ">
           <a
@@ -50,31 +45,25 @@
         <h2 class="mb-3 font-bold text-3xl tracking-tighter">Schritt-für-Schritt-Erklärung</h2>
         <ol class="text-gray-500 max-w-prose mb-10">
           <li>
-            Die Schüler einer Klasse werden mit 1,2,3,.. 
-            durchnummeriert, zum Beispiel der Klassenliste folgend.
+            Jeder Schüler erhält eine Zahl.
           </li>
           <li>
-            Die Schüler werden darum gebeten, ihre Kontakte in Form von 
-            Zahlen aufzulisten. (Zur Vereinfachung diese Schrittes gibt 
-            es [hier](Link) einen Vordruck.)
+            Jeder Schüler schreibt die Nummern der Mitschüler 
+            auf, mit welchen er auch außerhalb der Schule Kontakt hat — 
+            die Kontaktliste.
           </li>
           <li>
-            Eine Vertrauensperson (Schulpersonal, Lehrkräfte, 
-            Klassensprecher) sammelt die erstellten Kontaktlisten ein.
-
-          </li>
-          <li>
-            Die Kontaktlisten werden in die entsprechenden Felder auf 
-            dieser Website eingetragen. Weitere Einstellungen, wie die 
-            Anzahl der Gruppen können hier auch festgelegt werden. 
-            Danach wird die Anwendung gestartet.
-          </li>
-          <li>
-            Das Ergebnis ist ein Vorschlag für eine Einteilung der 
-            Klasse, welche die Anzahl der Kontakte zwischen den Gruppen 
-            möglichst gering hält.
+            Das Schulpersonal gibt die Anzahl der Schüler, die 
+            gewünschte Anzahl der Gruppen sowie die Kontaktlisten in die 
+            Felder auf dieser Website ein.
           </li>
         </ol>
+        <p class="text-gray-500 max-w-prose mb-10">
+        Das Ergebnis ist ein Vorschlag für eine Einteilung der 
+        Klasse, welche die Anzahl der Kontakte zwischen den Gruppen 
+        möglichst gering hält.
+        Die Gruppen sind dabei in etwa gleich groß.
+        </p>
         <div id="klassenteiler-app"></div>
       </section>
 
@@ -87,11 +76,10 @@
           <details open>
             <summary>Worum geht es?</summary>
             <p>
-              Diese Anwendung teilt eine gegebene Klasse in mehrere 
+              Die Anwendung teilt eine gegebene Klasse in mehrere 
               Gruppen auf, die etwa gleich groß sind und zwischen denen 
-              möglichst wenige Kontakte bestehen. Die Anzahl der Gruppen 
-              und der maximale Unterschied zwischen den Gruppengrößen 
-              (?) kann individuell festgelegt werden.
+              möglichst wenige Kontakte laufen. Die Anzahl der Gruppen 
+              kann dabei eingestellt werden.
             </p>
           </details>
 
@@ -117,7 +105,7 @@
             </p>
             
             <p>
-            Netzwerkforscher haben bereits genauer untersucht, wie groß 
+            Netzwerkforscher haben bereits [genauer untersucht](LINK), wie groß 
             der epidemiologische Effekt von Klassenteilungen generell 
             ist, und wie sehr dieser durch möglichst optimale Teilungen 
             nochmals gesteigert werden kann. Klar ist, der deutlich 
@@ -137,41 +125,44 @@
             <summary>Welche Daten werden benötigt?</summary>
             <p>
               Um die Klasse einzuteilen, werden Kontaktlisten der 
-              Schüler benötigt. Jeder Schüler wird dabei durch eine 
-              Nummer 1, 2, 3 und so weiter repräsentiert, zum Beispiel 
+              Schüler benötigt. Die Schüler werden dabei durch 
+              Nummern 1, 2, 3,... repräsentiert, zum Beispiel 
               anhand der alphabetischen Klassenliste. Jeder Schüler 
               schreibt daraufhin die Nummern der Schüler auf, mit 
               welchen er auch außerhalb der Schule Kontakt hat — die 
-              Kontaktliste. Die Reihenfolgen sind für das Ergebnis 
+              Kontaktliste. 
+              In den Beispieldaten hat Schüler 7 zum Beispiel Kontakt zu 
+              Schülern 4, 8 und 14.
+              Die Reihenfolgen der Eingabe sind für das Ergebnis 
               unwichtig. Selbst- und Mehrfachnennungen werden ignoriert.
             </p>
-            <aside class="mb-3 border-l-2 border-gray-200 bg-gray-50 p-3 rounded rounded-l-none">
-              Beispiel: Schüler 2 hat mit Schülern 3, 5 und 9 Kontakt. Die Liste
-              von Schüler 2 sieht dann so aus: <code>2: 3, 5, 9</code> (oder eine andere
-              Reihenfolge wie z.B. <code>2: 5, 9, 3</code>)
-            </aside>
+            <p>
+             Um das Eintragen der Kontaktlisten zu vereinfachen können
+             auch diese [Vordrucke](LINK) verwendet werden.
+            </p>
           </details>
 
           <details>
-            <summary>Was sind Kontakte?</summary>
+            <summary>Was genau sind Kontakte?</summary>
             <p>
               Die genaue Definition von einem Kontakt liegt im Ermessen 
               des Schulpersonals. Ein Kontakt kann zum Beispiel 
               bestehen, wenn sich zwei Schüler außerhalb der Schule 
               treffen oder auch wenn sie einfach nur befreundet sind. 
-              Wichtig ist aber, dass alle Schüler der gleichen 
-              Definition folgen, wenn sie ihre Kontaktlisten anlegen.
+              Wichtig ist aber, dass sich alle Schüler im Klaren 
+              über die Definition sind, wenn sie ihre Kontaktlisten anlegen.
             </p>
           </details>
           <details>
             <summary>Wie sieht es mit Datenschutz aus?</summary>
             <p>
-              Die Auswertung findet komplett lokal statt. Die Daten 
-              verlassen also den Rechner des Benutzers nicht.
+              Die Auswertung findet lokal auf dem Rechner des Benutzers 
+              statt. Es werden keine personenbezogenen Daten versendet, 
+              gespeichert oder verbreitet.
             </p>
           </details>
           <details>
-            <summary>Müssen wir uns an das Ergebnis halten?</summary>
+            <summary>Muss man sich an das Ergebnis halten?</summary>
             <p>
               Nein. Beim Teilen von Klassen können noch viele andere 
               Faktoren eine Rolle spielen, die nicht mit dem formalen 
@@ -185,18 +176,18 @@
             <summary>Wie gut ist die Aufteilung?</summary>
             <p>
               Die Anwendung berechnet unter den gegebenen Bedingungen 
-              (Kontaktliste, Gruppenanzahl etc.) eine Einteilung in der 
+              (Schüleranzahl, Gruppenanzahl, Kontaktlisten) eine Einteilung in der 
               die Anzahl der Kontakte zwischen den Gruppen möglichst 
-              klein gehalten wird. Idealerweise wäre die Anzahl der 
+              gering gehalten wird. Idealerweise wäre die Anzahl der 
               Kontakte also kleinstmöglich. Allerdings ist für eine 
-              optimale Lösung dieses Problems (Graph Partitioning) 
-              derzeit 
-              <a
-                href="https://en.wikipedia.org/wiki/Graph_partition#Problem_complexity"
+              optimale Lösung dieses Problems (<a
+                href="https://en.wikipedia.org/wiki/Graph_partition"
                 rel="noopener"
                 target="_blank"
-              > kein effizienter Algorithmus</a>
-              bekannt. Daher können wir keine theoretischen Garantien 
+                >Graph Partitioning</a
+              >) 
+              derzeit kein effizienter Algorithmus bekannt. Daher können 
+              wir keine theoretischen Garantien 
               für die Qualität unserer Lösung geben.
               
              
@@ -247,14 +238,19 @@
             <p>
               Wir zahlen die Serverkosten selber. Die Entwicklung der 
               Website erfolgte in unserer Freizeit, die Anwendung ist 
-              frei nutzbar und es gibt kein Bestreben mit der damit 
-              Geld zu verdienen.
+              frei nutzbar und wird es auch bleiben.
             </p>
           </details>
           <details>
             <summary>Wer steckt dahinter?</summary>
             <p>
               Unsere Namen etc.
+            </p>
+          </details>
+          <details>
+            <summary>Fragen, Feedback, Anregungen?</summary>
+            <p>
+            Schick uns eine Nachricht: feedback@dividi.app
             </p>
           </details>
         </div>
