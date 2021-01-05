@@ -8,18 +8,6 @@
     scroll-padding-top: 2.5rem;
   }
 
-  /* h1 {
-    @apply mb-3 font-bold text-3xl tracking-tighter;
-  }
-
-  h2 {
-    @apply mb-3 font-bold text-2xl tracking-tighter;
-  }
-
-  h3 {
-    @apply mb-3 font-bold text-xl tracking-tighter;
-  } */
-
   ol {
     @apply list-decimal list-outside ml-5;
   }
@@ -44,5 +32,17 @@
 
   .explainer p {
     @apply mt-2 mb-4;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input.number-input-no-arrows::-webkit-outer-spin-button,
+  input.number-input-no-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input.number-input-no-arrows[type="number"] {
+    -moz-appearance: textfield;
   }
 }

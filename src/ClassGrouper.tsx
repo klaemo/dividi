@@ -1,24 +1,13 @@
 import { h, Fragment } from "preact";
-import { useRef, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import {
   exampleClass,
   StudentInformation,
   partitionClass,
   FennelResult,
 } from "./fennel";
-
-/** Experimental highlight colors for the partitions */
-const PARTITION_COLORS = [
-  "text-blue-500",
-  "text-green-500",
-  "text-purple-500",
-  "text-yellow-500",
-  "text-pink-500",
-];
-
-function getPartitionIndex(result: FennelResult, id: number) {
-  return result.partions.findIndex((partition) => partition.includes(id));
-}
+import { StudentRow } from "./StudentRow";
+import { PARTITION_COLORS } from "./util";
 
 function Result({ result }: { result: FennelResult }) {
   return (
@@ -37,115 +26,6 @@ function Result({ result }: { result: FennelResult }) {
         Gruppen.
       </div>
     </>
-  );
-}
-
-function Student({
-  id,
-  contacts,
-  onChange,
-  result,
-}: {
-  id: number;
-  contacts: number[];
-  onChange: (contacts: number[]) => void;
-  result: FennelResult | null;
-}) {
-  const inputClasses =
-    "w-12 mr-2 border rounded border-gray-300 py-1 text-center focus:ring-indigo-300 focus:border-indigo-300";
-  const color =
-    result !== null ? PARTITION_COLORS[getPartitionIndex(result, id)] : "";
-  const [nextIsFocused, setNextIsFocused] = useState(false);
-  const [hasNextValue, setHasNextValue] = useState(false);
-  const nextInput = useRef<HTMLInputElement>();
-
-  return (
-    <tr>
-      <td
-        class={`px-6 py-2 whitespace-nowrap ${color}`}
-        aria-label="Schüler ID"
-      >
-        {id}
-      </td>
-      <td class="px-6 py-2 whitespace-nowrap flex items-center">
-        {contacts.map((contact, index) => (
-          <input
-            class={`${inputClasses} ${
-              result ? PARTITION_COLORS[getPartitionIndex(result, contact)] : ""
-            }`}
-            key={index}
-            type="text"
-            inputMode="numeric"
-            pattern="\d*"
-            min="0"
-            value={contact}
-            onBlur={(event) => {
-              if (event.target instanceof HTMLInputElement) {
-                const value = parseInt(event.target.value);
-                if (Number.isInteger(value) && value >= 0) {
-                  const newContacts = [...contacts];
-                  newContacts[index] = value;
-                  onChange(newContacts);
-                }
-
-                // remove contact
-                if (!event.target.value) {
-                  const newContacts = [...contacts];
-                  newContacts.splice(index, 1);
-                  onChange(newContacts);
-                }
-              }
-            }}
-          />
-        ))}
-        <input
-          ref={nextInput}
-          class={inputClasses}
-          type="text"
-          inputMode="numeric"
-          pattern="\d*"
-          min="0"
-          onInput={(event) => {
-            if (event.target instanceof HTMLInputElement) {
-              setHasNextValue(!!event.target.value);
-            }
-          }}
-          onFocus={(event) => {
-            // We display a dummy "next" input while the user is focused on this one,
-            // so they can "tab" to it.
-            setNextIsFocused(true);
-            if (event.target instanceof HTMLInputElement) {
-              setHasNextValue(!!event.target.value);
-            }
-          }}
-          onBlur={(event) => {
-            if (event.target instanceof HTMLInputElement) {
-              const value = parseInt(event.target.value);
-              if (Number.isInteger(value) && value >= 0) {
-                onChange([...contacts, value]);
-                event.target.value = "";
-                // re-focus in the next tick
-                requestAnimationFrame(() => {
-                  if (nextInput.current) {
-                    nextInput.current.focus();
-                  }
-                });
-              }
-            }
-            setNextIsFocused(false);
-          }}
-        />
-        {nextIsFocused && (
-          <input
-            class={`${inputClasses} pointer-events-none`}
-            inputMode="numeric"
-            pattern="\d*"
-            min="0"
-            tabIndex={hasNextValue ? 0 : -1}
-          />
-        )}
-      </td>
-    </tr>
   );
 }
 
@@ -224,6 +104,15 @@ export function ClassGrouperApp() {
                 if (event.target instanceof HTMLInputElement) {
                   const newLength = parseInt(event.target.value);
 
+                  if (
+                    !Number.isInteger(newLength) ||
+                    newLength < parseInt(event.target.min) ||
+                    newLength > parseInt(event.target.max)
+                  ) {
+                    event.target.reportValidity();
+                    return;
+                  }
+
                   if (newLength < data.length) {
                     setData(data.slice(0, newLength));
                   } else if (newLength > data.length) {
@@ -252,9 +141,20 @@ export function ClassGrouperApp() {
               type="number"
               value={numberOfGroups}
               min={2}
-              onChange={(event) => {
+              max={Math.round(data.length / 2)}
+              onInput={(event) => {
                 if (event.target instanceof HTMLInputElement) {
-                  setNumberOfGroups(parseInt(event.target.value));
+                  const newValue = parseInt(event.target.value)
+                  if (
+                    !Number.isInteger(newValue) ||
+                    newValue < parseInt(event.target.min) ||
+                    newValue > parseInt(event.target.max)
+                  ) {
+                    event.target.reportValidity();
+                    return;
+                  }
+
+                  setNumberOfGroups(newValue);
                 }
               }}
             ></input>
@@ -294,11 +194,12 @@ export function ClassGrouperApp() {
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
               {data.map((student, index) => (
-                <Student
+                <StudentRow
                   key={student.id}
                   id={student.id}
                   result={result}
                   contacts={student.contacts}
+                  maxStudents={data.length}
                   onChange={(contacts) => {
                     const newData = [...data];
                     newData[index] = {
