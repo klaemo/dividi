@@ -31,18 +31,18 @@ export function StudentRow({
   const lastInputRef = useRef<HTMLInputElement>();
 
   return (
-    <tr class="focus-within:bg-indigo-50">
+    <tr class="focus-within:bg-indigo-50 transition-colors">
       <td
         class={`px-6 py-2 whitespace-nowrap ${color}`}
         aria-label="Schüler ID"
       >
         {id}
       </td>
-      <td class="px-6 py-2 flex items-center">
+      <td class="px-6 pt-2 flex items-center flex-wrap">
         {inputs.map((contact, index) => (
           <input
             ref={index === inputs.length - 1 ? lastInputRef : undefined}
-            class={`${inputClasses} ${
+            class={`${inputClasses} mb-2 ${
               result ? PARTITION_COLORS[getPartitionIndex(result, contact)] : ""
             }`}
             key={index}
@@ -83,7 +83,7 @@ export function StudentRow({
         {numberOfInputs < maxStudents / 2 && (
           <button
             type="button"
-            class="text-gray-300 hover:text-gray-500 focus:text-indigo-500 py-1 px-1 focus:outline-none"
+            class="text-gray-300 hover:text-gray-500 focus:text-indigo-500 py-1 px-1 focus:outline-none mb-2"
             onClick={() => {
               setAdditionalInputs(
                 (prevAdditionalInputs) => prevAdditionalInputs + 1
