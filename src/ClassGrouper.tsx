@@ -53,6 +53,7 @@ export function ClassGrouperApp() {
 
   return (
     <form
+      class="mx-auto max-w-screen-xl"
       onSubmit={(event) => {
         event.preventDefault();
         try {
@@ -63,7 +64,7 @@ export function ClassGrouperApp() {
         }
       }}
     >
-      <div class="sticky top-0 flex justify-end items-center p-3 bg-white">
+      <div class="sticky top-0 flex justify-end items-center bg-white p-4 -mx-4 ">
         <div class="flex">
           {data !== initialData && (
             <button
@@ -163,7 +164,7 @@ export function ClassGrouperApp() {
           {!result && (
             <button
               type="button"
-              class="mr-8 font-medium text-gray-500 hover:text-gray-700 text-sm"
+              class="mr-8 font-medium text-indigo-600 hover:text-indigo-900"
               onClick={() => setData(exampleClass)}
             >
               Mit Beispieldaten ausprobieren
@@ -175,7 +176,7 @@ export function ClassGrouperApp() {
 
         <div class="mt-5 lg:mt-0 lg:ml-10 flex-grow lg:w-2/3">
           <h3 class="font-bold mb-4">2. Schüler eintragen</h3>
-          <table class="table-fixed min-w-full divide-y divide-gray-200 shadow overflow-hidden border-b border-gray-200 rounded-md ">
+          <table class="table-fixed min-w-full divide-y divide-gray-200 shadow overflow-hidden border-b border-gray-200 rounded-md">
             <thead class="bg-gray-50">
               <tr>
                 <th

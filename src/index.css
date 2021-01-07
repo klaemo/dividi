@@ -8,16 +8,22 @@
     scroll-padding-top: 2.5rem;
   }
 
-  ol {
+  /* ol {
     @apply list-decimal list-outside ml-5;
   }
 
   ol li {
     @apply mb-2;
-  }
+  } */
 }
 
 @layer components {
+  .hyphens-auto {
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+  }
+
   .explainer a {
     @apply text-indigo-600 hover:text-indigo-900;
   }

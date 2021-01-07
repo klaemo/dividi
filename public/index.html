@@ -10,192 +10,213 @@
     Kontakte zu zerschneiden."
     />
     <title>Dividi | Wechselunterricht während der COVID-19-Pandemie</title>
+    <script
+      async
+      defer
+      data-domain="dividi.app"
+      src="https://stats.dividi.app/js/index.js"
+    ></script>
   </head>
 
   <body class="flex flex-col min-h-screen bg-white text-gray-900">
     <main class="flex-grow">
-      <header class="mx-auto max-w-screen-xl py-10 px-5">
-        <h1
-          class="text-center text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
+      <header
+        class="bg-gradient-to-b from-indigo-200 to-white flex justify-center"
+      >
+        <div
+          class="w-full max-w-screen-xl border-indigo-200 px-4 py-10 lg:py-14"
         >
-          Dividi
-        </h1>
-        <p
-          class="mt-3 md:mt-5 text-base text-center text-gray-500 md:text-xl max-w-xl mx-auto"
-        >
-          Diese Website hilft dabei Schulklassen für Wechselunterricht in gleich große 
-          Gruppen einzuteilen, so dass möglichst wenige Freundschaften 
-          und Kontakte getrennt werden.
-        </p>
-        <div class="mt-3 md:mt-5 sm:flex justify-center mx-auto ">
-          <a
-            href="#teiler"
-            class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow"
-            >Los geht's</a
+          <h1
+            class="text-center text-4xl sm:text-5xl md:text-6xl tracking-tight font-extrabold text-gray-900"
           >
-          <a
-            href="#explainer"
-            class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200 shadow mt-3 sm:mt-0 sm:ml-3"
-            >Mehr erfahren</a
+            Dividi
+          </h1>
+          <p
+            class="mt-5 md:mt-10 text-base text-center text-gray-600 md:text-xl max-w-xl mx-auto"
           >
+            Diese Website hilft dabei Schulklassen für Wechselunterricht in
+            gleich große Gruppen einzuteilen, so dass möglichst wenige
+            Freundschaften und Kontakte getrennt werden.
+          </p>
+          <div class="mt-5 md:mt-10 sm:flex justify-center mx-auto">
+            <a
+              href="#teiler"
+              class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow"
+              >Los geht's</a
+            >
+            <a
+              href="#faq"
+              class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200 shadow mt-3 sm:mt-0 sm:ml-3"
+              >Mehr erfahren</a
+            >
+          </div>
         </div>
       </header>
 
-      <section id="teiler" class="mx-auto max-w-screen-xl mt-10 px-5">
-        <h2 class="mb-3 font-bold text-3xl tracking-tighter">Schritt-für-Schritt-Erklärung</h2>
-        <ol class="text-gray-500 max-w-prose mb-10">
-          <li>
+      <section id="teiler" class="mx-auto max-w-screen-xl py-10 lg:py-14 px-4">
+        <h2
+          class="mb-5 md:mb-10 font-bold text-2xl sm:text-3xl tracking-tighter text-center max-w-prose"
+        >
+          Schritt-für-Schritt-Erklärung
+        </h2>
+        <ol
+          class="lg:grid lg:grid-cols-3 lg:gap-16 lg:mb-10 text-center mx-auto max-w-prose lg:max-w-screen-lg"
+        >
+          <li class="mb-6 lg:mb-0">
+            <h3 class="font-bold text-xl mb-2 text-indigo-700">1.</h3>
             Die Schüler werden mit 1, 2, 3,... durchnummeriert.
           </li>
-          <li>
-            Die Schüler schreiben die Nummern der Mitschüler auf, mit 
-            welchen sie auch außerhalb der Schule Kontakt haben — 
-            die Kontaktlisten.
+          <li class="mb-6 lg:mb-0">
+            <h3 class="font-bold text-xl mb-2 text-indigo-700">2.</h3>
+            Die Schüler schreiben die Nummern der Mitschüler auf, mit welchen
+            sie auch außerhalb der Schule Kontakt haben — die Kontaktlisten.
           </li>
-          <li>
-            Das Schulpersonal gibt die Anzahl der Schüler, die 
-            gewünschte Anzahl der Gruppen sowie die Kontaktlisten in die 
-            Felder auf dieser Website ein.
+          <li class="mb-6 lg:mb-0">
+            <h3 class="font-bold text-xl mb-2 text-indigo-700">3.</h3>
+            Das Schulpersonal gibt die Anzahl der Schüler, die gewünschte Anzahl
+            der Gruppen sowie die Kontaktlisten in die Felder auf dieser Website
+            ein.
           </li>
         </ol>
-        <p class="text-gray-500 max-w-prose mb-10">
-        Das Ergebnis ist ein Vorschlag für eine Einteilung der 
-        Klasse, welche die Anzahl der Kontakte zwischen den Gruppen 
-        möglichst gering hält.
-        Die Gruppen sind dabei in etwa gleich groß.
+
+        <p class="max-w-prose text-center mx-auto">
+          Das Ergebnis ist ein Vorschlag für eine Einteilung der Klasse, welche
+          die Anzahl der Kontakte zwischen den Gruppen möglichst gering hält.
+          Die Gruppen sind dabei in etwa gleich groß.
         </p>
-        <div id="klassenteiler-app"></div>
       </section>
 
       <section
-        id="explainer"
-        class="explainer mx-auto max-w-screen-xl mt-10 px-5"
+        class="pb-10 lg:pb-14 px-4"
+        id="klassenteiler-app"
+      ></section>
+
+      <section
+        id="faq"
+        class="explainer mx-auto max-w-screen-xl py-10 lg:py-14 px-4"
       >
-        <h2 class="mb-3 font-bold text-3xl tracking-tighter">Fragen und Antworten</h2>
+        <h2 class="mb-3 font-bold text-3xl tracking-tighter">
+          Fragen und Antworten
+        </h2>
         <div class="max-w-prose">
           <details open>
             <summary>Worum geht es?</summary>
             <p>
-              Die Anwendung teilt eine gegebene Klasse in mehrere 
-              Gruppen auf, die etwa gleich groß sind und zwischen denen 
-              möglichst wenige Kontakte laufen. Die Anzahl der Gruppen 
-              kann dabei eingestellt werden.
+              Die Anwendung teilt eine gegebene Klasse in mehrere Gruppen auf,
+              die etwa gleich groß sind und zwischen denen möglichst wenige
+              Kontakte laufen. Die Anzahl der Gruppen kann dabei eingestellt
+              werden.
             </p>
           </details>
 
           <details>
             <summary>Was bringt das Ganze?</summary>
             <p>
-              Wechselunterricht mit geteilten Klassen ist herausfordernd 
-              für alle. Daher sollte eine möglichst sinnvolle Aufteilung 
-              der Klasse gewählt werden. Aus sozialer Perspektive 
-              bedeutet dies, dass möglichst wenige Freundschaften geteilt 
-              werden sollten. So wird Akzeptanz und Wohlbefinden bei den 
-              Schülern gefördert.
-            </p> 
-            <p>
-              Aus epidemiologischer Sicht wiederum, sollten die Anzahl 
-              der außerschulischen Kontakte zwischen den Gruppen 
-              möglichst klein gehalten werden. Der Sinn der Teilung ist 
-              ja eine Verkleinerung der Kontaktnetzwerke, da wäre es 
-              ungünstig, wenn sich die Schüler aus verschiedenen Gruppen 
-              nachmittags wieder in Vereinen oder zu Hause treffen. Das 
-              Virus würde so am Ende doch wieder in beide Gruppen 
-              gelangen.
+              Wechselunterricht mit geteilten Klassen ist herausfordernd für
+              alle. Daher sollte eine möglichst sinnvolle Aufteilung der Klasse
+              gewählt werden. Aus sozialer Perspektive bedeutet dies, dass
+              möglichst wenige Freundschaften geteilt werden sollten. So wird
+              Akzeptanz und Wohlbefinden bei den Schülern gefördert.
             </p>
-            
             <p>
-            Netzwerkforscher haben bereits
-              <a href="https://www.medrxiv.org/content/10.1101/2020.11.30.20241166v1" rel="noopener" target="_blank"
+              Aus epidemiologischer Sicht wiederum, sollten die Anzahl der
+              außerschulischen Kontakte zwischen den Gruppen möglichst klein
+              gehalten werden. Der Sinn der Teilung ist ja eine Verkleinerung
+              der Kontaktnetzwerke, da wäre es ungünstig, wenn sich die Schüler
+              aus verschiedenen Gruppen nachmittags wieder in Vereinen oder zu
+              Hause treffen. Das Virus würde so am Ende doch wieder in beide
+              Gruppen gelangen.
+            </p>
+
+            <p>
+              Netzwerkforscher haben bereits
+              <a
+                href="https://www.medrxiv.org/content/10.1101/2020.11.30.20241166v1"
+                rel="noopener"
+                target="_blank"
                 >genauer untersucht</a
-              >.
-            , wie groß 
-            der epidemiologische Effekt von Klassenteilungen generell 
-            ist, und wie sehr dieser durch möglichst optimale Teilungen 
-            nochmals gesteigert werden kann. Klar ist, der deutlich 
-            größte Effekt wird durch die Teilung an sich erzielt. Aber 
-            je mehr außerschulische Kontakte dabei verhindert werden, 
-            desto effektiver wird die Teilung.
+              >. , wie groß der epidemiologische Effekt von Klassenteilungen
+              generell ist, und wie sehr dieser durch möglichst optimale
+              Teilungen nochmals gesteigert werden kann. Klar ist, der deutlich
+              größte Effekt wird durch die Teilung an sich erzielt. Aber je mehr
+              außerschulische Kontakte dabei verhindert werden, desto effektiver
+              wird die Teilung.
             </p>
-            
+
             <p>
-            Das Ziel dieser Anwendung ist es daher den Schulen dabei zu 
-            helfen eine möglichst gute Einteilung der Klassen zu 
-            erreichen.
+              Das Ziel dieser Anwendung ist es daher den Schulen dabei zu helfen
+              eine möglichst gute Einteilung der Klassen zu erreichen.
             </p>
           </details>
 
           <details>
             <summary>Welche Daten werden benötigt?</summary>
             <p>
-              Um die Klasse einzuteilen, werden Kontaktlisten der 
-              Schüler benötigt. Die Schüler werden dabei durch 
-              Nummern 1, 2, 3,... repräsentiert, zum Beispiel 
-              anhand der alphabetischen Klassenliste. Die Schüler 
-              schreiben die Nummern der Mitschüler auf, mit welchen sie 
-              auch außerhalb der Schule Kontakt haben — die Kontaktlisten.
-              Die Reihenfolgen der Eingabe sind für das Ergebnis 
+              Um die Klasse einzuteilen, werden Kontaktlisten der Schüler
+              benötigt. Die Schüler werden dabei durch Nummern 1, 2, 3,...
+              repräsentiert, zum Beispiel anhand der alphabetischen
+              Klassenliste. Die Schüler schreiben die Nummern der Mitschüler
+              auf, mit welchen sie auch außerhalb der Schule Kontakt haben — die
+              Kontaktlisten. Die Reihenfolgen der Eingabe sind für das Ergebnis
               unwichtig. Selbst- und Mehrfachnennungen werden ignoriert.
             </p>
             <p>
-             Um das Eintragen der Kontaktlisten zu vereinfachen können
-             auch diese [Vordrucke](LINK) verwendet werden.
+              Um das Eintragen der Kontaktlisten zu vereinfachen können auch
+              diese
+              <a href="/downloads/Kontaktliste_Vorlage_dividi.pdf" download
+                >Vordrucke</a
+              >
+              verwendet werden.
             </p>
           </details>
 
           <details>
             <summary>Was genau sind Kontakte?</summary>
             <p>
-              Die genaue Definition von einem Kontakt liegt im Ermessen 
-              des Schulpersonals. Ein Kontakt kann zum Beispiel 
-              bestehen, wenn sich zwei Schüler außerhalb der Schule 
-              treffen oder auch wenn sie einfach nur befreundet sind. 
-              Wichtig ist aber, dass sich alle Schüler im Klaren 
-              über die Definition sind, wenn sie ihre Kontaktlisten anlegen.
+              Die genaue Definition von einem Kontakt liegt im Ermessen des
+              Schulpersonals. Ein Kontakt kann zum Beispiel bestehen, wenn sich
+              zwei Schüler außerhalb der Schule treffen oder auch wenn sie
+              einfach nur befreundet sind. Wichtig ist aber, dass sich alle
+              Schüler im Klaren über die Definition sind, wenn sie ihre
+              Kontaktlisten anlegen.
             </p>
           </details>
           <details>
             <summary>Wie sieht es mit Datenschutz aus?</summary>
             <p>
-              Die Auswertung findet lokal auf dem Rechner des Benutzers 
-              statt. Es werden keine personenbezogenen Daten versendet, 
-              gespeichert oder verbreitet.
+              Die Auswertung findet lokal auf dem Rechner des Benutzers statt.
+              Es werden keine personenbezogenen Daten versendet, gespeichert
+              oder verbreitet.
             </p>
           </details>
           <details>
             <summary>Muss man sich an das Ergebnis halten?</summary>
             <p>
-              Nein. Beim Teilen von Klassen können noch viele andere 
-              Faktoren eine Rolle spielen, die nicht mit dem formalen 
-              Regelwerk eines Computers erfasst werden können (oder 
-              sollten). Die berechnete Gruppeneinteilung kann dabei 
-              helfen Übersicht zu schaffen, sollte aber nicht als 
-              unabänderliches Endergebnis hingenommen werden.
+              Nein. Beim Teilen von Klassen können noch viele andere Faktoren
+              eine Rolle spielen, die nicht mit dem formalen Regelwerk eines
+              Computers erfasst werden können (oder sollten). Die berechnete
+              Gruppeneinteilung kann dabei helfen Übersicht zu schaffen, sollte
+              aber nicht als unabänderliches Endergebnis hingenommen werden.
             </p>
           </details>
           <details>
             <summary>Wie gut ist die Aufteilung?</summary>
             <p>
-              Die Anwendung berechnet unter den gegebenen Bedingungen 
-              (Schüleranzahl, Gruppenanzahl, Kontaktlisten) eine Einteilung in der 
-              die Anzahl der Kontakte zwischen den Gruppen möglichst 
-              gering gehalten wird. Idealerweise wäre die Anzahl der 
-              Kontakte also kleinstmöglich. Allerdings ist für eine 
-              optimale Lösung dieses Problems (<a
+              Die Anwendung berechnet unter den gegebenen Bedingungen
+              (Schüleranzahl, Gruppenanzahl, Kontaktlisten) eine Einteilung in
+              der die Anzahl der Kontakte zwischen den Gruppen möglichst gering
+              gehalten wird. Idealerweise wäre die Anzahl der Kontakte also
+              kleinstmöglich. Allerdings ist für eine optimale Lösung dieses
+              Problems (<a
                 href="https://en.wikipedia.org/wiki/Graph_partition"
                 rel="noopener"
                 target="_blank"
                 >Graph Partitioning</a
-              >) 
-              derzeit kein effizienter Algorithmus bekannt. Daher können 
-              wir keine theoretischen Garantien 
-              für die Qualität unserer Lösung geben.
-              
-             
-              In der Praxis sind unsere Ergebnisse allerdings fast 
-              immer äußerst nahe an den bestmöglichen Werten.
-              Für optimale Lösungen und größere Klassen
-              empfehlen wir professionelle Programme wie
+              >) derzeit kein effizienter Algorithmus bekannt. Daher können wir
+              keine theoretischen Garantien für die Qualität unserer Lösung
+              geben. In der Praxis sind unsere Ergebnisse allerdings fast immer
+              äußerst nahe an den bestmöglichen Werten. Für optimale Lösungen
+              und größere Klassen empfehlen wir professionelle Programme wie
               <a href="https://kahip.github.io/" rel="noopener" target="_blank"
                 >KaHIP</a
               >.
@@ -216,15 +237,14 @@
                 rel="noopener"
                 target="_blank"
                 >Graph Partitioning</a
-              >. 
-              Um das Ergebnis zu verbessern, wird Fennel mehrfach mit 
-              zufällig gewählter Reihenfolge der Schüler ausgeführt. 
-              Daher ist die eingegebene Reihenfolge der Schüler auch 
-              unwichtig für das Gesamtergebnis. Es kann darüber hinaus 
-              dazu kommen, dass eine wiederholte Berechnung zu 
-              verschiedenen Ergebnissen führt. Wer sich den Code 
-              anschauen möchte, kann in unserem Git (LINK) vorbeischauen.
-              </p>
+              >. Um das Ergebnis zu verbessern, wird Fennel mehrfach mit
+              zufällig gewählter Reihenfolge der Schüler ausgeführt. Daher ist
+              die eingegebene Reihenfolge der Schüler auch unwichtig für das
+              Gesamtergebnis. Es kann darüber hinaus dazu kommen, dass eine
+              wiederholte Berechnung zu verschiedenen Ergebnissen führt. Wer
+              sich den Code anschauen möchte, kann in unserem Git (LINK)
+              vorbeischauen.
+            </p>
           </details>
           <details>
             <summary>Werden gegenseitige Kontakte doppelt gewichtet?</summary>
@@ -237,34 +257,31 @@
           <details>
             <summary>Wie wird das Projekt finanziert?</summary>
             <p>
-              Wir zahlen die Serverkosten selber. Die Entwicklung der 
-              Website erfolgte in unserer Freizeit, die Anwendung ist 
-              frei nutzbar und wird es auch bleiben.
+              Wir zahlen die Serverkosten selber. Die Entwicklung der Website
+              erfolgte in unserer Freizeit, die Anwendung ist frei nutzbar und
+              wird es auch bleiben.
             </p>
           </details>
           <details>
             <summary>Wer steckt dahinter?</summary>
-            <p>
-            <ul>
+
+            <ul class="mt-2 mb-4">
               <li>Richard Lang, Datenverarbeitung</li>
               <li>Alexander Radtke, Dies &amp Das</li>
               <li>Clemens Stolle, Webentwicklung</li>
-            </ul> 
-            </p>
+            </ul>
           </details>
           <details>
             <summary>Fragen, Feedback, Anregungen?</summary>
-            <p>
-            Schick uns eine Nachricht: rlang@posteo.de
-            </p>
+            <p>Schick uns eine Nachricht: rlang@posteo.de</p>
           </details>
         </div>
       </section>
     </main>
 
-    <footer class="bg-gray-50 border-t border-gray-200 text-sm mt-10">
+    <footer class="bg-gray-50 border-t border-gray-200 text-sm">
       <div
-        class="mx-auto max-w-screen-xl px-5 flex justify-center py-6 text-gray-400 hover:text-gray-500"
+        class="mx-auto max-w-screen-xl px-4 flex justify-center py-6 text-gray-400 hover:text-gray-500"
       >
         <a href="/impressum">Impressum</a>
       </div>
