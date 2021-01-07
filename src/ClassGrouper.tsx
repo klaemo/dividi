@@ -64,7 +64,7 @@ export function ClassGrouperApp() {
         }
       }}
     >
-      <div class="sticky top-0 flex justify-end items-center p-4 -mx-4 ">
+      <div class="sticky top-0 flex justify-end items-center bg-white p-4 -mx-4 ">
         <div class="flex">
           {data !== initialData && (
             <button
