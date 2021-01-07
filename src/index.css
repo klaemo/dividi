@@ -33,7 +33,7 @@
   }
 
   .explainer summary {
-    @apply cursor-pointer py-1;
+    @apply cursor-pointer py-1 focus:text-indigo-600 outline-none;
   }
 
   .explainer p {
