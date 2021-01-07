@@ -54,6 +54,14 @@ export function StudentRow({
               if (event.target instanceof HTMLInputElement) {
                 const value = parseInt(event.target.value);
 
+                // remove contact
+                if (!event.target.value) {
+                  const newContacts = [...contacts];
+                  newContacts.splice(index, 1);
+                  onChange(newContacts);
+                  return
+                }
+
                 if (
                   !Number.isInteger(value) ||
                   value < parseInt(event.target.min) ||
@@ -66,13 +74,6 @@ export function StudentRow({
                 if (Number.isInteger(value) && value >= 0) {
                   const newContacts = [...contacts];
                   newContacts[index] = value;
-                  onChange(newContacts);
-                }
-
-                // remove contact
-                if (!event.target.value) {
-                  const newContacts = [...contacts];
-                  newContacts.splice(index, 1);
                   onChange(newContacts);
                 }
               }
