@@ -93,7 +93,7 @@ export function ClassGrouperApp() {
           <h3 class="font-bold mb-4">1. Klasse anlegen</h3>
           <label class="block mb-6">
             <div class="pr-2 text-sm font-medium text-gray-700">
-              Wieviele Schüler sind in der Klasse?
+              Wie viele Schüler sind in der Klasse?
             </div>
             <input
               class="w-20 mt-1 rounded border border-gray-300 focus:outline-none focus:ring-indigo-300 focus:border-indigo-300"
@@ -135,7 +135,7 @@ export function ClassGrouperApp() {
 
           <label class="block mb-6">
             <div class="pr-2 text-sm font-medium text-gray-700">
-              In wieviele Gruppen soll die Klasse geteilt werden?
+              In wie viele Gruppen soll die Klasse geteilt werden?
             </div>
             <input
               class="w-20 mt-1 rounded border border-gray-300 focus:outline-none focus:ring-indigo-300 focus:border-indigo-300"
