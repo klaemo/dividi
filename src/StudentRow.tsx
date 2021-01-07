@@ -48,7 +48,7 @@ export function StudentRow({
             key={index}
             type="number"
             min={1}
-            max={maxStudents + 1}
+            max={maxStudents}
             value={contact || ""}
             onInput={(event) => {
               if (event.target instanceof HTMLInputElement) {
