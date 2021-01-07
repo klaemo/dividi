@@ -53,7 +53,7 @@ export const exampleClass = [
  */
 export function partitionClass(
   students: StudentInformation[],
-  { k = 2, nu = 1.1 }: FennelOptions = {}
+  { k = 2, nu = 1.00 }: FennelOptions = {}
 ): FennelResult {
   // Input:
   // - array of Students Class
@@ -336,7 +336,7 @@ function fennel(
 
     for (let i = 0; i < k; i++) {
       // skip clusters that are already too large
-      if (C[i] > max_cluster_size) continue;
+      if (C[i] >= max_cluster_size) continue;
 
       // compute f(v,i)
       const f = NcapS[i] - alpha * gamma * Math.pow(C[i], gamma - 1);
