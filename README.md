@@ -22,4 +22,10 @@ The page will reload if you make edits.
 Builds a static copy of your site to the `build/` folder.
 Your app is ready to be deployed!
 
+## Plans
+
+- support multiple languages
+- consider moving to [Zola](https://www.getzola.org)
+- ...and more
+
 > **Contributor Guidelines:** [CONTRIBUTING.md](./CONTRIBUTING.md) 
