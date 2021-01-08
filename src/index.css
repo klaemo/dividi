@@ -8,13 +8,9 @@
     scroll-padding-top: 2.5rem;
   }
 
-  /* ol {
-    @apply list-decimal list-outside ml-5;
+  a {
+    @apply text-indigo-600 hover:text-indigo-900;
   }
-
-  ol li {
-    @apply mb-2;
-  } */
 }
 
 @layer components {
@@ -22,10 +18,6 @@
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
-  }
-
-  .explainer a {
-    @apply text-indigo-600 hover:text-indigo-900;
   }
 
   .explainer ul {
@@ -38,6 +30,10 @@
 
   .explainer p {
     @apply mt-2 mb-4;
+  }
+
+  .page-footer a {
+    @apply text-gray-400 hover:text-gray-500;
   }
 
   /* Chrome, Safari, Edge, Opera */
