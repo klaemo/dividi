@@ -50,6 +50,10 @@ export const exampleClass = [
  * clusters (groups) such that each cluster has roughly the same
  * number of vertices and the number of crossing edges (contacts)
  * is small. (Results are typically good, but no guarantees.)
+ * 
+ * @param array of students StudentInformation
+ * @param FennelOptions
+ * @returns FennelResult: partition is in cluster/element representation  
  */
 export function partitionClass(
   students: StudentInformation[],
@@ -62,9 +66,6 @@ export function partitionClass(
   // 1) partition of the students
   // 2) number of crossing edges
 
-  // number of times we run the FENNEL heuristic
-  const num_it = 10000;
-
   console.log("Input class:", students);
 
   // We will represent graphs as adjacency lists, i.e. double arrays of
@@ -75,15 +76,22 @@ export function partitionClass(
   console.log("Derived directed multigraph with loops:");
   console.log(D);
   // run some basic checks on the input
-  const E: number[][] = checkDirectedGraph(D);
-  console.log("Vertices with a self-loop:", E[0]);
-  console.log("Vertices with parallel edges:", E[1]);
+  const ERR: number[][] = checkDirectedGraph(D);
+  console.log("Vertices with a self-loop:", ERR[0]);
+  console.log("Vertices with parallel edges:", ERR[1]);
   // turn D into a simple graph G
   const G = convertDirectedGraphToGraph(D); // O(n^2) operations
   console.log("Derived simple graph:");
   console.log(G);
+  
+  // define weights
+  const E: number[][] = G;
+  const n: number = G.length;
+  var V: number[] = new Array(n);
+  for (let v = 0; v < n; v++) V[v]=1;
+  
   // partition G
-  var R = partitionGraph(G, {k,nu}); // O(m) operations, most expensive step due to many iterations 
+  var R = partitionGraph(G, E, V, {k,nu}); // O(m) operations, most expensive step due to many iterations 
   console.log(R);
   // compute cluster/element representation of partition (with change
   // of index +1)
@@ -204,19 +212,27 @@ function convertDirectedGraphToGraph(D: number[][]): number[][] {
  * is small. (Results are typically good, but no guarantees.)
  * 
  * @param double array of numbers G: adjacency lists of a simple graph
+ * @param double array of numbers E: edge weights
+ * @param array of numbers V: vertex weights
  * @param FennelOptions
  * @returns FennelResult: The partition has length n and entries 0,...,k-1
  */
 export function partitionGraph(
   G: number[][],
+  E: number[][],
+  V: number[],
   {k, nu}: FennelOptions = {}
 ): FennelResult {
-  // number of times we run the FENNEL heuristic
+  // number of times we run Fennel
   const num_it = 10000;
 
   var n = G.length; // number of vertices
-  var m = 0; // number of edges
-  for (let v = 0; v < n; v++) m += G[v].length;
+  var m = 0; // total weight of edges
+  for (let v = 0; v < n; v++) {
+      const d = G[v].length;
+      // sum weights of edges to neighbours of v
+      for (let j = 0; j < d; j++) m += E[v][j];
+    }
   m /= 2; // need to account for doublecounting
   // P is an array whose entries are 0,...,n-1 in some permutation. We
   // will use P as a random ordering for Fennel
@@ -225,7 +241,7 @@ export function partitionGraph(
 
   // The following variables track the partition, cut size, cluster
   // sizes and (maximum) difference between cluster sizes during
-  // the repeated applications Fennel
+  // the repeated applications of Fennel
 
   // Note that the partition S will be an array of length n, where
   // S[v]=i indicates that vertex v is in cluster S_i
@@ -233,10 +249,10 @@ export function partitionGraph(
   let min_cut_size = n * n;
   let min_cluster_sizes = [];
   let min_diff = n;
-  // We run FENNEL num_it times with random orderings of the vertices
+  // We run Fennel num_it times with random orderings of the vertices
   for (let i = 0; i < num_it; i++) {
-    // compute partition using Fennel heuristic
-    const S = fennel(G, n, m, k, nu, shuffleArray(P)); // O(n+m) operations
+    // compute partition using Fennel
+    const S = fennel(G, n, m, E, V, k, nu, shuffleArray(P)); // O(n+m) operations
 
     // compute cut size
     const cut_size = computeCutSize(G, S); // O(n+m) operations
@@ -298,7 +314,9 @@ function shuffleArray<T>(array: T[]): T[] {
  *
  * @param G adjacency lists of the input graph, G[0] = [1,2] means that vertex 0 is adjacent to vertex 1 and 2
  * @param n vertex order, note that G.length(n)=n
- * @param m number of edges of G
+ * @param m total weight of edges of G
+ * @param E edge weights, E[v][j] denotes weight of edge corresponding to G[v][j]
+ * @param V vertex weights
  * @param k number of clusters
  * @param nu balancing parameter
  * @param P permutation of 0,...,n-1
@@ -307,6 +325,8 @@ function fennel(
   G: number[][],
   n: number,
   m: number,
+  E: number[][],
+  V: number[],
   k: number,
   nu: number,
   P: number[]
@@ -338,12 +358,12 @@ function fennel(
   // cluster S_i, where i is such that a function f(v,i) is maximised.
 
   for (let l = 0; l < n; l++) {
-    // permutatation P decides the order in which we allocate vertices
+    // permutation P decides the order in which we allocate vertices
     const v = P[l];
     const d = G[v].length; // degree of vertex v
 
     // NcapS is an array of ints of length k+1. Index i represents
-    // cluster i and NcapS[i] is the size of the intersection
+    // cluster i and NcapS[i] is the edge-weighted size of the intersection
     // N(v) cap S_i. Note that NcapS[k] will count the unallocated vertices
     // (as a byproduct)
 
@@ -351,9 +371,9 @@ function fennel(
     for (let i = 0; i < k; i++) NcapS[i] = 0;
 
     // This is the most expensive loop! For each neighbour w = G[v][j]
-    // of v and cluster index i=S[w] of w, we increase NcapS[i] by one.
+    // of v and cluster index i=S[w] of w, we increase NcapS[i] by the weight E[v][j].
 
-    for (let j = 0; j < d; j++) NcapS[S[G[v][j]]]++;
+    for (let j = 0; j < d; j++) NcapS[S[G[v][j]]] += E[v][j];
 
     // Compute cluster index i_max = i for which f(v,i) is maximal
     let i_max = k;
@@ -372,7 +392,7 @@ function fennel(
     }
 
     S[v] = i_max; // add v to cluster S_(i_max)
-    C[i_max]++; // account for this addition in the cluster sizes C
+    C[i_max] += V[v]; // account for this addition in the cluster sizes C
   }
   return S;
 }
