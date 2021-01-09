@@ -53,7 +53,7 @@ export const exampleClass = [
  */
 export function partitionClass(
   students: StudentInformation[],
-  { k = 2, nu = 1.00 }: FennelOptions = {}
+  { k = 2, nu = 1.05 }: FennelOptions = {}
 ): FennelResult {
   // Input:
   // - array of Students Class
@@ -78,63 +78,20 @@ export function partitionClass(
   const E: number[][] = checkDirectedGraph(D);
   console.log("Vertices with a self-loop:", E[0]);
   console.log("Vertices with parallel edges:", E[1]);
-  // Turn D into a simple graph G
+  // turn D into a simple graph G
   const G = convertDirectedGraphToGraph(D); // O(n^2) operations
   console.log("Derived simple graph:");
   console.log(G);
-
-  var n = G.length; // number of vertices
-  var m = 0; // number of edges
-  for (let v = 0; v < n; v++) m += G[v].length;
-  m /= 2; // need to account for doublecounting
-  // P is an array whose entries are 0,...,n-1 in some permutation. We
-  // will use P as a random ordering for Fennel
-  var P = new Array(n);
-  for (let v = 0; v < n; v++) P[v] = v;
-
-  // The following variables track the partition, cut size, cluster
-  // sizes and (maximum) difference between cluster sizes during
-  // the repeated applications Fennel
-
-  // Note that the partition S will be an array of length n, where
-  // S[v]=i indicates that vertex v is in cluster S_i
-  let min_S: number[] = [];
-  let min_cut_size = n * n;
-  let min_cluster_sizes = [];
-  let min_diff = n;
-  // We run FENNEL num_it times with random orderings of the vertices
-  for (let i = 0; i < num_it; i++) {
-    // compute partition using Fennel heuristic
-    const S = fennel(G, n, m, k, nu, shuffleArray(P)); // O(n+m) operations
-
-    // compute cut size
-    const cut_size = computeCutSize(G, S); // O(n+m) operations
-    // compute cluster sizes and maximum difference between them
-    const cluster_sizes = computeClusterSizes(S, k);
-    const min_cluster_size = Math.min(...cluster_sizes);
-    const max_cluster_size = Math.max(...cluster_sizes);
-    const diff = max_cluster_size - min_cluster_size;
-
-    // If the cut_size is smaller (b1 = true), we choose S.
-    // If the cut_size is the same, but the clusters are more
-    // balanced (b2 = true), we also choose S.
-    const b1 = cut_size < min_cut_size;
-    const b2 = cut_size == min_cut_size && diff < min_diff;
-    if (b1 || b2) {
-      min_cut_size = cut_size;
-      min_S = S;
-      min_cluster_sizes = cluster_sizes;
-      min_diff = diff;
-    }
-  }
-
+  // partition G
+  var R = partitionGraph(G, {k,nu}); // O(m) operations, most expensive step due to many iterations 
+  console.log(R);
   // compute cluster/element representation of partition (with change
   // of index +1)
-  const C = formatPartition(min_S, k); // O(n) operations
+  const C = formatPartition(R.partions, k); // O(n) operations
 
   return {
     partions: C,
-    minCutSize: min_cut_size,
+    minCutSize: R.minCutSize,
   };
 }
 
@@ -238,6 +195,74 @@ function convertDirectedGraphToGraph(D: number[][]): number[][] {
   }
 
   return G;
+}
+
+/**
+ * Partitions the vertex set of a graph into
+ * clusters such that each cluster has roughly the same
+ * number of vertices and the number of crossing edges (contacts)
+ * is small. (Results are typically good, but no guarantees.)
+ * 
+ * @param double array of numbers G: adjacency lists of a simple graph
+ * @param FennelOptions
+ * @returns FennelResult: The partition has length n and entries 0,...,k-1
+ */
+export function partitionGraph(
+  G: number[][],
+  {k, nu}: FennelOptions = {}
+): FennelResult {
+  // number of times we run the FENNEL heuristic
+  const num_it = 10000;
+
+  var n = G.length; // number of vertices
+  var m = 0; // number of edges
+  for (let v = 0; v < n; v++) m += G[v].length;
+  m /= 2; // need to account for doublecounting
+  // P is an array whose entries are 0,...,n-1 in some permutation. We
+  // will use P as a random ordering for Fennel
+  var P = new Array(n);
+  for (let v = 0; v < n; v++) P[v] = v;
+
+  // The following variables track the partition, cut size, cluster
+  // sizes and (maximum) difference between cluster sizes during
+  // the repeated applications Fennel
+
+  // Note that the partition S will be an array of length n, where
+  // S[v]=i indicates that vertex v is in cluster S_i
+  let min_S: number[] = [];
+  let min_cut_size = n * n;
+  let min_cluster_sizes = [];
+  let min_diff = n;
+  // We run FENNEL num_it times with random orderings of the vertices
+  for (let i = 0; i < num_it; i++) {
+    // compute partition using Fennel heuristic
+    const S = fennel(G, n, m, k, nu, shuffleArray(P)); // O(n+m) operations
+
+    // compute cut size
+    const cut_size = computeCutSize(G, S); // O(n+m) operations
+    // compute cluster sizes and maximum difference between them
+    const cluster_sizes = computeClusterSizes(S, k);
+    const min_cluster_size = Math.min(...cluster_sizes);
+    const max_cluster_size = Math.max(...cluster_sizes);
+    const diff = max_cluster_size - min_cluster_size;
+
+    // If the cut_size is smaller (b1 = true), we choose S.
+    // If the cut_size is the same, but the clusters are more
+    // balanced (b2 = true), we also choose S.
+    const b1 = cut_size < min_cut_size;
+    const b2 = cut_size == min_cut_size && diff < min_diff;
+    if (b1 || b2) {
+      min_cut_size = cut_size;
+      min_S = S;
+      min_cluster_sizes = cluster_sizes;
+      min_diff = diff;
+    }
+  }
+
+  return {
+    partions: min_S,
+    minCutSize: min_cut_size,
+  };
 }
 
 /**
