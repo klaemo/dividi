@@ -200,7 +200,7 @@ function convertDirectedGraphToGraph(D: number[][]): number[][] {
 /**
  * Partitions the vertex set of a graph into
  * clusters such that each cluster has roughly the same
- * number of vertices and the number of crossing edges (contacts)
+ * number of vertices and the number of crossing edges
  * is small. (Results are typically good, but no guarantees.)
  * 
  * @param double array of numbers G: adjacency lists of a simple graph
