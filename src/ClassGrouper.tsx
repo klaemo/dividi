@@ -30,7 +30,7 @@ function Result({ result }: { result: FennelResult }) {
 }
 
 const initialData: StudentInformation[] = Array.from(
-  { length: 20 },
+  { length: 5 },
   (_, index) => ({
     id: index + 1,
     contacts: [],
@@ -145,7 +145,7 @@ export function ClassGrouperApp() {
               max={Math.round(data.length / 2)}
               onInput={(event) => {
                 if (event.target instanceof HTMLInputElement) {
-                  const newValue = parseInt(event.target.value)
+                  const newValue = parseInt(event.target.value);
                   if (
                     !Number.isInteger(newValue) ||
                     newValue < parseInt(event.target.min) ||
