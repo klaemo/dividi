@@ -22,27 +22,59 @@ export interface FennelResult {
 }
 
 // Example group, "Network 1"
+//~ export const exampleClass = [
+  //~ { id: 1, contacts: [15, 16] },
+  //~ { id: 2, contacts: [] },
+  //~ { id: 3, contacts: [5, 18] },
+  //~ { id: 4, contacts: [14, 19] },
+  //~ { id: 5, contacts: [3, 9] },
+  //~ { id: 6, contacts: [7, 17] },
+  //~ { id: 7, contacts: [4, 8, 14] },
+  //~ { id: 8, contacts: [14] },
+  //~ { id: 9, contacts: [5, 12, 20] },
+  //~ { id: 10, contacts: [9, 17] },
+  //~ { id: 11, contacts: [9, 12, 13, 20] },
+  //~ { id: 12, contacts: [9, 11, 13, 20] },
+  //~ { id: 13, contacts: [3, 11, 12, 18, 20] },
+  //~ { id: 14, contacts: [4, 19] },
+  //~ { id: 15, contacts: [16] },
+  //~ { id: 16, contacts: [1, 15] },
+  //~ { id: 17, contacts: [6, 9, 10, 14, 15] },
+  //~ { id: 18, contacts: [3, 5, 6, 13] },
+  //~ { id: 19, contacts: [4, 7, 12, 14] },
+  //~ { id: 20, contacts: [11, 13] },
+//~ ];
+
+// Example group, "Network 3"
 export const exampleClass = [
-  { id: 1, contacts: [15, 16] },
-  { id: 2, contacts: [] },
-  { id: 3, contacts: [5, 18] },
-  { id: 4, contacts: [14, 19] },
-  { id: 5, contacts: [3, 9] },
-  { id: 6, contacts: [7, 17] },
-  { id: 7, contacts: [4, 8, 14] },
-  { id: 8, contacts: [14] },
-  { id: 9, contacts: [5, 12, 20] },
-  { id: 10, contacts: [9, 17] },
-  { id: 11, contacts: [9, 12, 13, 20] },
-  { id: 12, contacts: [9, 11, 13, 20] },
-  { id: 13, contacts: [3, 11, 12, 18, 20] },
+  { id: 1, contacts: [4, 18 ,21] },
+  { id: 2, contacts: [14] },
+  { id: 3, contacts: [9, 13, 22] },
+  { id: 4, contacts: [18] },
+  { id: 5, contacts: [] },
+  { id: 6, contacts: [11] },
+  { id: 7, contacts: [4] },
+  { id: 8, contacts: [19, 20 , 25] },
+  { id: 9, contacts: [3, 13, 22] },
+  { id: 10, contacts: [17] },
+  { id: 11, contacts: [6, 16, 17, 27] },
+  { id: 12, contacts: [15, 25] },
+  { id: 13, contacts: [3, 9, 22] },
   { id: 14, contacts: [4, 19] },
   { id: 15, contacts: [16] },
-  { id: 16, contacts: [1, 15] },
-  { id: 17, contacts: [6, 9, 10, 14, 15] },
-  { id: 18, contacts: [3, 5, 6, 13] },
-  { id: 19, contacts: [4, 7, 12, 14] },
-  { id: 20, contacts: [11, 13] },
+  { id: 16, contacts: [17] },
+  { id: 17, contacts: [6, 10, 11, 16, 27] },
+  { id: 18, contacts: [1, 4, 21] },
+  { id: 19, contacts: [7, 8, 15, 20, 25] },
+  { id: 20, contacts: [28] },
+  { id: 21, contacts: [1, 4, 18] },
+  { id: 22, contacts: [3, 9, 13] },
+  { id: 23, contacts: [6, 10, 11, 14, 19] },
+  { id: 24, contacts: [] },
+  { id: 25, contacts: [8, 19, 20, 22] },
+  { id: 26, contacts: [4, 7, 8, 18, 20] },
+  { id: 27, contacts: [1, 11, 17] },
+  { id: 28, contacts: [20] }
 ];
 
 /**
@@ -53,7 +85,7 @@ export const exampleClass = [
  */
 export function partitionClass(
   students: StudentInformation[],
-  { k = 2, nu = 1.00 }: FennelOptions = {}
+  { k = 2, nu = 1.0 }: FennelOptions = {}
 ): FennelResult {
   // Input:
   // - array of Students Class
