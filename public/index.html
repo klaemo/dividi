@@ -105,6 +105,10 @@
         <h2 class="mb-3 font-bold text-3xl tracking-tighter">
           Fragen und Antworten
         </h2>
+        <h3 class="mb-3 font-bold text-1xl tracking-tighter">
+          Allgemeines
+        </h3>
+        
         <div class="max-w-prose">
           <details open>
             <summary>Worum geht es?</summary>
@@ -155,7 +159,11 @@
               eine möglichst gute Einteilung der Klassen zu erreichen.
             </p>
           </details>
-
+          
+        <h3 class="mb-3 font-bold text-1xl tracking-tighter">
+          Nutzung der Website
+        </h3>
+        
           <details>
             <summary>Welche Daten werden benötigt?</summary>
             <p>
@@ -188,14 +196,7 @@
               Kontaktlisten anlegen.
             </p>
           </details>
-          <details>
-            <summary>Wie sieht es mit Datenschutz aus?</summary>
-            <p>
-              Die Auswertung findet lokal auf dem Rechner des Benutzers statt.
-              Es werden keine personenbezogenen Daten versendet, gespeichert
-              oder verbreitet.
-            </p>
-          </details>
+          
           <details>
             <summary>Muss man sich an das Ergebnis halten?</summary>
             <p>
@@ -206,29 +207,11 @@
               aber nicht als unabänderliches Endergebnis hingenommen werden.
             </p>
           </details>
-          <details>
-            <summary>Wie gut ist die Aufteilung?</summary>
-            <p>
-              Die Anwendung berechnet unter den gegebenen Bedingungen
-              (Schüleranzahl, Gruppenanzahl, Kontaktlisten) eine Einteilung, in
-              der die Anzahl der Kontakte zwischen den Gruppen möglichst gering
-              gehalten wird. Idealerweise wäre die Anzahl der Kontakte also
-              kleinstmöglich. Allerdings ist für eine optimale Lösung dieses
-              Problems (<a
-                href="https://en.wikipedia.org/wiki/Graph_partition"
-                rel="noopener"
-                target="_blank"
-                >Graph Partitioning</a
-              >) derzeit kein effizienter Algorithmus bekannt. Daher können wir
-              keine theoretischen Garantien für die Qualität unserer Lösung
-              geben. In der Praxis sind unsere Ergebnisse allerdings fast immer
-              äußerst nahe an den bestmöglichen Werten. Für optimale Lösungen
-              und größere Klassen empfehlen wir professionelle Programme wie
-              <a href="https://kahip.github.io/" rel="noopener" target="_blank"
-                >KaHIP</a
-              >.
-            </p>
-          </details>
+          
+        <h3 class="mb-3 font-bold text-1xl tracking-tighter">
+          Berechnung der Aufteilung
+        </h3>
+        
           <details>
             <summary>Was passiert im Hintergrund?</summary>
             <p>
@@ -260,6 +243,31 @@
               tun.
             </p>
           </details>
+          
+          <details>
+            <summary>Wie gut ist die Aufteilung?</summary>
+            <p>
+              Die Anwendung berechnet unter den gegebenen Bedingungen
+              (Schüleranzahl, Gruppenanzahl, Kontaktlisten) eine Einteilung, in
+              der die Anzahl der Kontakte zwischen den Gruppen möglichst gering
+              gehalten wird. Idealerweise wäre die Anzahl der Kontakte also
+              kleinstmöglich. Allerdings ist für eine optimale Lösung dieses
+              Problems (<a
+                href="https://en.wikipedia.org/wiki/Graph_partition"
+                rel="noopener"
+                target="_blank"
+                >Graph Partitioning</a
+              >) derzeit kein effizienter Algorithmus bekannt. Daher können wir
+              keine theoretischen Garantien für die Qualität unserer Lösung
+              geben. In der Praxis sind unsere Ergebnisse allerdings fast immer
+              äußerst nahe an den bestmöglichen Werten. Für optimale Lösungen
+              und größere Klassen empfehlen wir professionelle Programme wie
+              <a href="https://kahip.github.io/" rel="noopener" target="_blank"
+                >KaHIP</a
+              >.
+            </p>
+          </details>
+          
           <details>
             <summary>Werden gegenseitige Kontakte doppelt gewichtet?</summary>
             <p>
@@ -268,6 +276,11 @@
               den anderen zu sehen.
             </p>
           </details>
+          
+          <h3 class="mb-3 font-bold text-1xl tracking-tighter">
+            Organisation
+          </h3>
+          
           <details>
             <summary>Wie wird das Projekt finanziert?</summary>
             <p>
@@ -285,8 +298,38 @@
               <li>Clemens Stolle, Webentwicklung</li>
             </ul>
           </details>
+          
           <details>
-            <summary>Fragen, Feedback, Anregungen?</summary>
+            <summary>Wie sieht es mit dem Datenschutz aus?</summary>
+            <p>
+              Die Auswertung findet lokal auf dem Rechner des Benutzers statt.
+              Es werden keine personenbezogenen Daten versendet, gespeichert
+              oder verbreitet.
+            </p>
+          </details>
+          
+        <h3 class="mb-3 font-bold text-1xl tracking-tighter">
+          Sonstiges
+        </h3>
+        
+          <details>
+            <summary>Gibt es ähnliche Projekte?</summary>
+            <p>
+              Ja, sogar mehrere.
+              Die verschiedenen Anwendungen unterscheiden sich jeweils 
+              in ihrer Nutzung und Funktionalität. Eine Übersicht dazu gibt es auf <a href="https://www.lehrerfreund.de/schule/1s/wechselunterricht-hybridunterricht-gruppeneinteilung/4856">Lehrerfreund.de</a>.
+              <ul class="mt-2 mb-4">
+                <li><a href="https://klassenteiler.de/">Klassenteiler.de</a> (<a href="https://youtu.be/ru3nemEsM6w">Video</a>) </li>
+                <li><a href="https://www.rulemaker.de/aufteilung.html">Aufteilungsrechner</a> von Andreas Neumann.</li>
+              </ul>
+              
+              Schick uns eine Nachricht:
+              <a href="mailto:feedback@dividi.app">feedback@dividi.app</a>
+            </p>
+          </details>
+          
+          <details>
+            <summary>Weitere Fragen, Feedback, Anregungen?</summary>
             <p>
               Schick uns eine Nachricht:
               <a href="mailto:feedback@dividi.app">feedback@dividi.app</a>
