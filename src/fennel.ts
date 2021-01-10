@@ -87,7 +87,7 @@ export function partitionClass(
   // define weights
   const E: number[][] = G;
   const n: number = G.length;
-  var V: number[] = new Array(n);
+  const V: number[] = new Array(n);
   for (let v = 0; v < n; v++) V[v]=1;
   
   // partition G
