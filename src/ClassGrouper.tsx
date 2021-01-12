@@ -15,22 +15,25 @@ function Result({ result }: { result: FennelResult }) {
       <h3 class="font-bold mb-4">Vorgeschlagene Teilung der Klasse</h3>
       {result.partions.map((group, index) => (
         <>
-          <div class={`mt-3 font-bold ${PARTITION_COLORS[index]}`}>
-            Gruppe {index + 1}
+          <div class={`mt-3`}>
+            <span class={`font-bold ${PARTITION_COLORS[index]}`}>
+              Gruppe {index + 1}{" "}
+            </span>
+            <span class="text-sm">({group.length} Schüler)</span>
           </div>
           <div>{group.join(", ")}</div>
         </>
       ))}
       <div className="mt-3">
-        Es gibt <strong>{result.minCutSize}</strong> Kontakte zwischen den
-        Gruppen.
+        Es gibt <strong>{result.minCutSize}</strong> mögliche Kontakte zwischen
+        den Gruppen.
       </div>
     </>
   );
 }
 
 const initialData: StudentInformation[] = Array.from(
-  { length: 20 },
+  { length: 5 },
   (_, index) => ({
     id: index + 1,
     contacts: [],
@@ -145,7 +148,7 @@ export function ClassGrouperApp() {
               max={Math.round(data.length / 2)}
               onInput={(event) => {
                 if (event.target instanceof HTMLInputElement) {
-                  const newValue = parseInt(event.target.value)
+                  const newValue = parseInt(event.target.value);
                   if (
                     !Number.isInteger(newValue) ||
                     newValue < parseInt(event.target.min) ||
