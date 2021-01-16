@@ -1,12 +1,20 @@
-// To do:
-// - sanity checks on input
-//   + check that all neighbours are  within 1,...,n
-//   + check that graph has vertex order at most 100 (say)
-//   + throw alert when there are loops, parallel edges
-
 export interface StudentInformation {
   id: number;
   contacts: number[];
+}
+
+export interface Pair {
+  first: number;
+  second: number;
+}
+
+/**
+ * adjacency_list[0] = [1,2] means that vertex 0 is adjacent to vertex 1 and 2
+ * edge_weights[v][j] denotes weight of the edge corresponding to G[v][j]
+ */
+export interface Graph {
+  adjacency_list: number[][];
+  edge_weights: number[][];
 }
 
 interface FennelOptions {
@@ -91,150 +99,167 @@ export function partitionClass(
   students: StudentInformation[],
   { k = 2, nu = 1.0 }: FennelOptions = {}
 ): FennelResult {
-  // Input:
-  // - array of Students Class
-
-  // Output:
-  // 1) partition of the students
-  // 2) number of crossing edges
-
-  console.log("Input class:", students);
-
-  // We will represent graphs as adjacency lists, i.e. double arrays of
-  // ints. The vertices are labelled 0,1,2,.... So if G is a graph, then
-  // G[v] is the array of neighbours of vertex v.
-  // Convert Class of students to a directed (multi) graph (with loops)
+  // convert StudentInformation to an (unweighted) directed (multi) graph (with loops)
   const D = convertClassToDirectedGraph(students); // O(n+m) operations
-  console.log("Derived directed multigraph with loops:");
-  console.log(D);
-  // run some basic checks on the input
-  const ERR: number[][] = checkDirectedGraph(D);
-  console.log("Vertices with a self-loop:", ERR[0]);
-  console.log("Vertices with parallel edges:", ERR[1]);
-  // turn D into a simple graph G
-  const G = convertDirectedGraphToGraph(D); // O(n^2) operations
-  console.log("Derived simple graph:");
-  console.log(G);
+
+  // turn D into a (unweighted) simple graph G
+  const F = convertDirectedGraphToGraph(D); // O(n^2) operations
+  console.log(F)
   
-  // define weights
-  const E: number[][] = G;
-  const n: number = G.length;
-  const V: number[] = new Array(n);
-  for (let v = 0; v < n; v++) V[v]=1;
+  // turn F into a weighted graph
+  F.edge_weights = F.adjacency_list;
+  let G = F;  
+  
+  // to take into account hard pairs / anti pairs uncomment following lines
+  //~ const pairs = [{first: 0, second: 1}, {first: 0, second: 2}]; // forced to be in the same group
+  //~ const anti_pairs = [{first: 3, second: 4}]; // forced to be in different groups
+  //~ G = addWeightToEdges(F, pairs, 1000000);
+  //~ G = addWeightToEdges(G, anti_pairs, -1000000);
   
   // partition G
-  var R = partitionGraph(G, E, V, {k,nu}); // O(m) operations, most expensive step due to many iterations 
-  console.log(R);
+  const S = partitionGraph(G, {k,nu}); // O(m) operations, most expensive step due to many iterations 
   // compute cluster/element representation of partition (with change
   // of index +1)
-  const C = formatPartition(R.partions, k); // O(n) operations
+  const C = formatPartition(S, k); // O(n) operations
 
   return {
     partions: C,
-    minCutSize: R.minCutSize,
+    minCutSize: computeEdgeCutSize(F,S),
   };
 }
 
 /**
  * @param students double array of Persons GRP: adjacency lists of directed graph
- * @returns adjacency lists of (directed) graph
+ * @returns D unweighted directed graph
  */
-function convertClassToDirectedGraph(students: StudentInformation[]): number[][] {
+function convertClassToDirectedGraph(students: StudentInformation[]): Graph {
   // Running time: O(n+m)
   // Note input student ids are 1,...,n whereas output indices are
   // 0,...,n-1. Also, Students need not be sorted by id.
-  var n = students.length;
-  var G = new Array(n);
+  const n = students.length;
+  
+  const L = new Array(n);
   for (let i = 0; i < n; i++) {
     const student = students[i]; // student
     const v = student.id - 1;
-    G[v] = [];
+    L[v] = [];
     let d = student.contacts.length; // number of friends
-    for (let j = 0; j < d; j++) G[v].push(student.contacts[j] - 1);
-  }
-  return G;
-}
-
-/**
- * @param D double array of integers D: adjacency lists of directed graph
- * @returns double array of numbers E:
- * E[0]: list of vertices with a self-loop
- * E[1]: list of vertices with parallel edges
-*/
-function checkDirectedGraph(D: number[][]): number[][] {
-  // Running time: O(n^2)
-
-  var n = D.length;
-
-  // Create adjacency matrix M.
-  var M = new Array(n);
-  for (let v = 0; v < n; v++) {
-    M[v] = new Array(n);
-    for (let w = 0; w < n; w++) M[v][w] = 0;
-  }
-  for (let v = 0; v < n; ++v) {
-    var d = D[v].length; // degree of vertex v
-
-    for (let j = 0; j < d; ++j) {
-      var w = D[v][j]; // neighbour of vertex v
-      M[v][w]++;
-    }
+    for (let j = 0; j < d; j++) L[v].push(student.contacts[j] - 1);
   }
   
-  
-  const E: number[][] = [[],[]];
-  // Search for self-loops
-  for (let v = 0; v < n; v++) {
-    if (M[v][v] > 0) E[0].push(v);
-  }  
-  
-  // Search for repeated edges
-  for (let v = 0; v < n; v++) {
-    for (let w = 0; w < n; w++) {
-      if (M[v][w] > 1) E[1].push(v); 
-    }
-  }
-
-  return E;
+  return {
+    adjacency_list: L, 
+    edge_weights: [],
+    };
 }
 
 /**
  * @param D double array of integers D: adjacency lists of directed graph
  * @returns double array of integers G_simple: adjacency lists of the corresponding simple graph
  */
-function convertDirectedGraphToGraph(D: number[][]): number[][] {
+function convertDirectedGraphToGraph(D: Graph): Graph {
   // Running time: O(n^2)
-
-  var n = D.length;
+  
+  const L = D.adjacency_list;
+  const n = L.length;
 
   // Create adjacency matrix M. (This is the only way I see to keep
   // the running time below O(n^2).)
-  var M = new Array(n);
+  const M = new Array(n);
   for (let v = 0; v < n; v++) {
     M[v] = new Array(n);
     for (let w = 0; w < n; w++) M[v][w] = 0;
   }
   for (let v = 0; v < n; ++v) {
-    var d = D[v].length; // degree of vertex v
+    const d = L[v].length; // degree of vertex v
 
     for (let j = 0; j < d; ++j) {
-      var w = D[v][j]; // neighbour of vertex v
+      const w = L[v][j]; // neighbour of vertex v
       if (v == w) continue;
       M[v][w] = 1;
       M[w][v] = 1;
     }
   }
 
-  // Recover the simple graph G from the adjacency matrix M
-  var G = new Array(n);
+  // Recover adjacencies K of simple graph from the adjacency matrix M
+  const K = new Array(n);
   for (let v = 0; v < n; v++) {
-    G[v] = [];
+    K[v] = [];
     for (let w = 0; w < n; w++) {
-      if (M[v][w] == 1) G[v].push(w);
+      if (M[v][w] == 1) K[v].push(w);
     }
   }
 
-  return G;
+  return {
+    adjacency_list: K, 
+    edge_weights: [],
+    };
+}
+
+/**
+ * @param G: Graph
+ * @param P: edges to update
+ * @param weight: weight to be added on edges P
+ * @returns F: updated graph
+ */
+function addWeightToEdges(G: Graph, P: Pair[], weight: number): Graph {
+  // Running time: O(n^2)
+  
+  const L = G.adjacency_list;
+  const E = G.edge_weights;
+  const n = L.length;
+
+  // set up matrix for adjacencies M and edge weights N
+  const M = new Array(n);
+  const N = new Array(n);
+  for (let v = 0; v < n; v++) {
+    M[v] = new Array(n);
+    N[v] = new Array(n);
+    for (let w = 0; w < n; w++) {
+      M[v][w] = 0;
+      N[v][w] = 0;
+      }
+  }
+  for (let v = 0; v < n; ++v) {
+    const d = L[v].length; // degree of vertex v
+
+    for (let j = 0; j < d; ++j) {
+      const u = L[v][j]; // neighbour of vertex v
+      const w = E[v][j]; // edge weight of uv
+      M[v][u] = 1;
+      N[v][u] = w;
+    }
+  }
+  
+  // update graph and edge weights
+  const q = P.length
+  for (let i = 0; i < q; i++) {
+    const f = P[i].first;
+    const s = P[i].second;
+    M[f][s] = 1;
+    M[s][f] = 1;
+    N[f][s] += weight;
+    N[s][f] += weight;
+  }
+
+  // recover updated graph and edge weights
+  const K = new Array(n);
+  const F = new Array(n);
+  for (let v = 0; v < n; v++) {
+    K[v] = [];
+    F[v] = [];
+    for (let u = 0; u < n; u++) {
+      if (M[v][u] !== 0) {
+        K[v].push(u);
+        F[v].push(N[v][u]);
+        }
+    }
+  }
+
+  return {
+    adjacency_list: K,
+    edge_weights: F,
+  };
 }
 
 /**
@@ -243,32 +268,31 @@ function convertDirectedGraphToGraph(D: number[][]): number[][] {
  * number of vertices and the number of crossing edges
  * is small. (Results are typically good, but no guarantees.)
  * 
- * @param double array of numbers G: adjacency lists of a simple graph
- * @param double array of numbers E: edge weights
- * @param array of numbers V: vertex weights
+ * @param G: simple weighted graph
  * @param FennelOptions
  * @returns FennelResult: The partition has length n and entries 0,...,k-1
  */
 export function partitionGraph(
-  G: number[][],
-  E: number[][],
-  V: number[],
+  G: graph,
   {k, nu}: FennelOptions = {}
-): FennelResult {
+): number[] {
   // number of times we run Fennel
   const num_it = 10000;
 
-  var n = G.length; // number of vertices
-  var m = 0; // total weight of edges
+  const L = G.adjacency_list;
+  const E = G.edge_weights;
+  
+  const n = L.length; // number of vertices
+  let m = 0; // total weight of edges
   for (let v = 0; v < n; v++) {
-      const d = G[v].length;
+      const d = L[v].length;
       // sum weights of edges to neighbours of v
       for (let j = 0; j < d; j++) m += E[v][j];
     }
   m /= 2; // need to account for doublecounting
   // P is an array whose entries are 0,...,n-1 in some permutation. We
   // will use P as a random ordering for Fennel
-  var P = new Array(n);
+  const P = new Array(n);
   for (let v = 0; v < n; v++) P[v] = v;
 
   // The following variables track the partition, cut size, cluster
@@ -284,7 +308,7 @@ export function partitionGraph(
   // We run Fennel num_it times with random orderings of the vertices
   for (let i = 0; i < num_it; i++) {
     // compute partition using Fennel
-    const S = fennel(G, n, m, E, V, k, nu, shuffleArray(P)); // O(n+m) operations
+    const S = fennel(G, m, k, nu, shuffleArray(P)); // O(n+m) operations
 
     // compute cut size
     const cut_size = computeCutSize(G, S); // O(n+m) operations
@@ -307,10 +331,7 @@ export function partitionGraph(
     }
   }
 
-  return {
-    partions: min_S,
-    minCutSize: min_cut_size,
-  };
+  return min_S;
 }
 
 /**
@@ -326,7 +347,7 @@ function shuffleArray<T>(array: T[]): T[] {
     let randId = Math.floor(Math.random() * curId);
     curId -= 1;
     // Swap it with the current element.
-    let tmp = array[curId];
+    const tmp = array[curId];
     array[curId] = array[randId];
     array[randId] = tmp;
   }
@@ -344,33 +365,30 @@ function shuffleArray<T>(array: T[]): T[] {
  *
  * Running time: O(n+m)
  *
- * @param G adjacency lists of the input graph, G[0] = [1,2] means that vertex 0 is adjacent to vertex 1 and 2
- * @param n vertex order, note that G.length(n)=n
+* @param G: simple weighted graph
  * @param m total weight of edges of G
- * @param E edge weights, E[v][j] denotes weight of edge corresponding to G[v][j]
- * @param V vertex weights
  * @param k number of clusters
  * @param nu balancing parameter
  * @param P permutation of 0,...,n-1
+ * @returns S partition, where S[v]=i means that vertex v has been assigned to cluster S_i.
  */
 function fennel(
-  G: number[][],
-  n: number,
+  G: Graph,
   m: number,
-  E: number[][],
-  V: number[],
   k: number,
   nu: number,
   P: number[]
 ): number[] {
-  // Output:
-  // - array of ints S of length n, where S[v]=i means that
-  // vertex v has been assigned to cluster S_i.
+
+  const L = G.adjacency_list;
+  const E = G.edge_weights;
 
   // gamma is an optimization paramter, whose value is was suggested by
   // Tsourakakis et al.
-
-  const gamma = 1.5; // optimization parameter
+  const gamma = 1.5;
+  
+  const n = L.length; // number of vertices
+  
   const max_cluster_size = (nu * n) / k; // maximal cluster size
   const alpha = (m * Math.pow(k, gamma - 1)) / Math.pow(n, gamma); // needed to compute f(v,i)
 
@@ -379,7 +397,7 @@ function fennel(
   // vertex 3 is in cluster 1.
   // Initially every vertex is assigned to a (buffer) cluster k
   const S: number[] = new Array(n);
-  for (let v = 0; v < n; v++) S[v] = k; // faster than Array(n).fill(k)
+  for (let v = 0; v < n; v++) S[v] = k;
 
   // C is an array of integers of length k. Indices represent clusters
   // and values represent assigned cluster sizes.
@@ -392,7 +410,7 @@ function fennel(
   for (let l = 0; l < n; l++) {
     // permutation P decides the order in which we allocate vertices
     const v = P[l];
-    const d = G[v].length; // degree of vertex v
+    const d = L[v].length; // degree of vertex v
 
     // NcapS is an array of ints of length k+1. Index i represents
     // cluster i and NcapS[i] is the edge-weighted size of the intersection
@@ -402,10 +420,10 @@ function fennel(
     const NcapS = new Array(k + 1);
     for (let i = 0; i < k; i++) NcapS[i] = 0;
 
-    // This is the most expensive loop! For each neighbour w = G[v][j]
+    // The following is the most expensive loop! For each neighbour w = L[v][j]
     // of v and cluster index i=S[w] of w, we increase NcapS[i] by the weight E[v][j].
 
-    for (let j = 0; j < d; j++) NcapS[S[G[v][j]]] += E[v][j];
+    for (let j = 0; j < d; j++) NcapS[S[L[v][j]]] += E[v][j];
 
     // Compute cluster index i_max = i for which f(v,i) is maximal
     let i_max = k;
@@ -424,33 +442,61 @@ function fennel(
     }
 
     S[v] = i_max; // add v to cluster S_(i_max)
-    C[i_max] += V[v]; // account for this addition in the cluster sizes C
+    ++C[i_max]; // account for this addition in the cluster sizes C
   }
   return S;
 }
 
 /**
- * Computes the cut size of S, i.e. the number of crossing edges
- * @param G double array of ints G: adjacency lists of the input graph, G[0] = [1,2] means that vertex 0 is adjacent to vertex 1 and 2
- * @param S array of ints S: vertex parttion where S[v] is the cluster index of vertex v
- * @returns array of ints C of length k: partition size where C[i] is the size of cluster i
+ * Computes the (weighted) cut size of S, i.e. the number of crossing edges
+ * @param G weighted simple graph
+ * @param S vertex partition where S[v] is the cluster index of vertex v
+ * @returns (weighted) cut size of S
  */
-function computeCutSize(G: number[][], S: number[]): number {
+function computeCutSize(G: Graph, S: number[]): number {
   // Running time: O(n+m)
-  var n = S.length;
-  var cut_size = 0;
+  
+  const L = G.adjacency_list;
+  const E = G.edge_weights;
+  
+  const n = S.length;
+  let cut_size = 0;
   for (let v = 0; v < n; ++v) {
-    var d = G[v].length; // degree of vertex v
+    const d = L[v].length; // degree of vertex v
 
     for (let j = 0; j < d; ++j) {
-      var w = G[v][j]; // neighbour of vertex v
-      if (S[v] !== S[G[v][j]]) cut_size++;
+      const w = L[v][j]; // neighbour of vertex v
+      if (S[v] !== S[L[v][j]]) cut_size += E[v][j];
     }
   }
 
   return cut_size / 2;
 }
 
+/**
+ * Computes the edge cut size of S, i.e. the number of crossing edges
+ * @param G weighted simple graph
+ * @param S vertex partition where S[v] is the cluster index of vertex v
+ * @returns edge cut size of S
+ */
+function computeEdgeCutSize(G: Graph, S: number[]): number {
+  // Running time: O(n+m)
+  
+  const L = G.adjacency_list;
+  
+  const n = S.length;
+  let cut_size = 0;
+  for (let v = 0; v < n; ++v) {
+    const d = L[v].length; // degree of vertex v
+
+    for (let j = 0; j < d; ++j) {
+      const w = L[v][j]; // neighbour of vertex v
+      if (S[v] !== S[L[v][j]]) cut_size++;
+    }
+  }
+
+  return cut_size / 2;
+}
 /**
  * Computes clusters sizes of a partition S of k clusters
  * @param S array of ints S: vertex parttion where S[v] is the cluster index of vertex v
