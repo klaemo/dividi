@@ -104,7 +104,6 @@ export function partitionClass(
 
   // turn D into a (unweighted) simple graph G
   const F = convertDirectedGraphToGraph(D); // O(n^2) operations
-  console.log(F)
   
   // turn F into a weighted graph
   F.edge_weights = F.adjacency_list;
