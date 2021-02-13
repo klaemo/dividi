@@ -1,0 +1,5 @@
+{
+  "[njk]": {
+    "editor.defaultFormatter": "eseom.nunjucks-template"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "de": {
+    "submit_button": "Teilung berechnen",
+    "reset_button": "Zurücksetzen",
+    "class_settings": {
+      "headline": "1. Klasse anlegen",
+      "number_of_studens_label": "Wie viele Schüler sind in der Klasse?",
+      "number_of_groups_label": "In wie viele Gruppen soll die Klasse geteilt werden?"
+    },
+    "contact_lists": {
+      "headline": "2. Schüler eintragen",
+      "header_student": "Schüler",
+      "header_contacts": "Kontakte"
+    },
+    "load_sample_data": "Mit Beispieldaten ausprobieren",
+    "results": {
+      "headline": "Vorgeschlagene Teilung der Klasse",
+      "group": "Gruppe {{number}}",
+      "group_size": "{{number}} Schüler",
+      "min_cut_size": "Es gibt {{minCutSize}} mögliche Kontakte zwischen den Gruppen."
+    }
+  },
+  "en": {
+    "submit_button": "Calculate Division",
+    "reset_button": "Reset",
+    "class_settings": {
+      "headline": "1. Create a Class",
+      "number_of_studens_label": "How many students are in the class?",
+      "number_of_groups_label": "How many groups should the class be divided into?"
+    },
+    "contact_lists": {
+      "headline": "2. Enter Contact Lists",
+      "header_student": "Student",
+      "header_contacts": "Contacts"
+    },
+    "load_sample_data": "Try with sample data",
+    "results": {
+      "headline": "Proposed division of the class",
+      "group": "Group {{number}}",
+      "group_size": "{{number}} Students",
+      "min_cut_size": "There are {{minCutSize}} possible contacts between the groups."
+    }
+  }
+}
