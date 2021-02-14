@@ -94,7 +94,7 @@
         </h2>
 
         <div class="max-w-prose">
-          {% for item in collections["faq_" + lang] %}
+          {% for item in collections["faq_" + lang] | order %}
           <details>
             <summary>{{ item.data.title }}</summary>
             {{ item.templateContent | safe }}

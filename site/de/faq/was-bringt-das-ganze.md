@@ -1,5 +1,6 @@
 ---
 title: Was bringt das Ganze?
+order: 2
 ---
 
 Wechselunterricht mit geteilten Klassen ist herausfordernd für alle. Daher sollte eine möglichst sinnvolle Aufteilung der Klasse gewählt werden. Aus sozialer Perspektive bedeutet dies, dass möglichst wenige Freundschaften geteilt werden sollten. So wird Akzeptanz und Wohlbefinden bei den Schülern gefördert.

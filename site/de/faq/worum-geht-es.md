@@ -1,5 +1,6 @@
 ---
 title: Worum geht es?
+order: 1
 ---
 
 Die Anwendung teilt eine gegebene Klasse in mehrere Gruppen auf,

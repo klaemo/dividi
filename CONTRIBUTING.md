@@ -19,9 +19,14 @@ cd klassenteiler
 npm install
 ```
 
-## Adding a New Language
+## Structure of the Projects
 
-TBD
+We're using [Eleventy](https://www.11ty.dev) as a static site generator for the website and [tailwindcss](https://tailwindcss.com) for styling.
+The Dividi JavaScript app is built with preact.
+
+- `site`: the templates and contents of the website
+  - there are subdirectories for each language (for example `site/de` or `site/en`)
+- `src`: the source code of the Dividi JavaScript app
 
 ## Pull Request Process
 
