@@ -8,9 +8,11 @@ const grouperRoot = document.getElementById("klassenteiler-app");
 const appMessages = JSON.parse(
   document.getElementById("app-messages")?.textContent as string
 );
+const { lang } = document.documentElement;
 
-const ctx = rosetta(appMessages);
-ctx.locale(document.documentElement.lang);
+// #app-messages only contains the currently active translation
+const ctx = rosetta({ [lang]: appMessages });
+ctx.locale(lang);
 
 if (grouperRoot) {
   render(

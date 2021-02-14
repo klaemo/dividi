@@ -26,6 +26,7 @@ The Dividi JavaScript app is built with preact.
 
 - `site`: the templates and contents of the website
   - there are subdirectories for each language (for example `site/de` or `site/en`)
+  - `site/_data/app_messages.json` contains the translations for the Dividi app
 - `src`: the source code of the Dividi JavaScript app
 
 ## Pull Request Process

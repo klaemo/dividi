@@ -122,7 +122,7 @@
     </footer>
 
     <script type="application/json" id="app-messages">
-      {{ app_messages | dump | safe }}
+      {{ app_messages[lang] | dump | safe }}
     </script>
     <script type="module" src="/dist/index.js"></script>
   </body>
