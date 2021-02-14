@@ -6,7 +6,7 @@
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ page_description }}" />
 
-    {% for item in project.enabled_languages %}
+    {% for item in i18n.enabled_languages %}
       <link rel="alternate" hreflang="{{ item.code }}" href="/{{ item.code }}" />
     {% endfor %}
 
@@ -22,7 +22,7 @@
 
   <body class="flex flex-col min-h-screen bg-white text-gray-900">
     <div class="flex absolute top-0 right-3">
-      {% for item in project.enabled_languages %}
+      {% for item in i18n.enabled_languages %}
         <a href="/{{ item.code }}" class="px-2 py-2">{{ item.icon }}</a>
       {% endfor %}
     </div>

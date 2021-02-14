@@ -29,6 +29,16 @@ The Dividi JavaScript app is built with preact.
   - `site/_data/app_messages.json` contains the translations for the Dividi app
 - `src`: the source code of the Dividi JavaScript app
 
+## Adding a Translation
+
+Initialize the new language with the provided script (it takes a language code as the parameter):
+
+```sh
+./scripts/add-language.js fr
+```
+
+This will generate the necessary skeleton in the `site` directory for you. You can now start translating!
+
 ## Pull Request Process
 
 Checkout a topic branch from the base branch `main` and merge back against that branch.

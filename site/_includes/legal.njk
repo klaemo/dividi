@@ -9,7 +9,7 @@
     />
     <title>{{ page_title }}</title>
 
-    {% for item in project.enabled_languages %}
+    {% for item in i18n.enabled_languages %}
       <link rel="alternate" hreflang="{{ item.code }}" href="/{{ item.code }}/{{ page.fileSlug }}" />
     {% endfor %}
 

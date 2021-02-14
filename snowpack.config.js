@@ -1,8 +1,14 @@
+const languages = require('./site/_data/i18n.json')
+
+const routes = languages.enabled_languages.reduce((obj, lang) => {
+  obj[`_site/${lang.code}`] = { url: `/${lang.code}` }
+  return obj
+}, {})
+
 /** @type {import("snowpack").SnowpackUserConfig} */
 module.exports = {
   mount: {
-    "_site/de": { url: "/de" },
-    "_site/en": { url: "/en" },
+    ...routes,
     "site/downloads": "/downloads",
     src: { url: "/dist" },
   },
