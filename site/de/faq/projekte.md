@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Gibt es ähnliche Projekte?
 ---
 

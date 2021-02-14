@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Worum geht es?
 ---
 

@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Wie wird das Projekt finanziert?
 ---
 

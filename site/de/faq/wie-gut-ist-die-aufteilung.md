@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Wie gut ist die Aufteilung?
 ---
 

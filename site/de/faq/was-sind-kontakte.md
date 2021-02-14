@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Was genau sind Kontakte?
 ---
 

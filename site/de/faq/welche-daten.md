@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Welche Daten werden benötigt?
 
 ---

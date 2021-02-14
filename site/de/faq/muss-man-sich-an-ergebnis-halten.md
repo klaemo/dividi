@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Muss man sich an das Ergebnis halten?
 ---
 

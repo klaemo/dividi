@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Wie sieht es mit dem Datenschutz aus?
 ---
 

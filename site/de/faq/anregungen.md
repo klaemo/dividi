@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Weitere Fragen, Feedback, Anregungen?
 ---
 

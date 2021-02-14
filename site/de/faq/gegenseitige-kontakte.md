@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Werden gegenseitige Kontakte doppelt gewichtet?
 ---
 

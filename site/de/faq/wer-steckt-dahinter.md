@@ -1,5 +1,4 @@
 ---
-tags: faq
 title: Wer steckt dahinter?
 ---
 
