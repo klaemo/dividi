@@ -13,11 +13,11 @@ explanation:
   aside: The website proposes a division of the class, which keeps the number of contacts between the groups low. The groups have approximately the same size.
 
   steps:
-    - title: 1. Enumerate Students
+    - title: 1. Enumerate students
       text: Students are given consecutive numbers 1, 2, 3,....
-    - title: 2. Create Contact Lists
+    - title: 2. Create contact lists
       text: Students write down the numbers of classmates with whom they have contact outside of school (<a href="/downloads/Kontaktliste_Vorlage_dividi_A4.pdf" download="download">downloadable form</a >).
-    - title: 3. Enter Data
+    - title: 3. Enter data
       text: School staff enters the class size, the desired number of groups, and the contact lists in the fields below.
 
 faq:

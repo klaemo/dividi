@@ -24,12 +24,12 @@
     "submit_button": "Calculate Division",
     "reset_button": "Reset",
     "class_settings": {
-      "headline": "1. Create a Class",
+      "headline": "1. Create a class",
       "number_of_studens_label": "How many students are in the class?",
-      "number_of_groups_label": "How many groups should the class be divided into?"
+      "number_of_groups_label": "Into how many groups should the class be divided?"
     },
     "contact_lists": {
-      "headline": "2. Enter Contact Lists",
+      "headline": "2. Enter contact lists",
       "header_student": "Student",
       "header_contacts": "Contacts"
     },

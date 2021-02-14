@@ -1,9 +1,11 @@
 ---
-layout: impressum
+layout: legal
+title: Legal Notice
 page_title: Legal Notice | Dividi
+tags: footer_en
 ---
 
-# Legal Notice
+# {{ title }}
 
 Angaben gemäß § 5 TMG
 

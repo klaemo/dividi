@@ -1,9 +1,11 @@
 ---
-layout: impressum
+layout: legal
+title: Impressum
 page_title: Impressum | Dividi
+tags: footer_de
 ---
 
-# Impressum
+# {{ title }}
 
 Angaben gemäß § 5 TMG
 

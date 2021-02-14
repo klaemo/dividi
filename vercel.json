@@ -2,7 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/", "destination": "/de", "permanent": false }
+    { "source": "/", "destination": "/de", "permanent": false },
+    { "source": "/impressum", "destination": "/de/impressum", "permanent": false }
   ],
   "headers": [
     {
