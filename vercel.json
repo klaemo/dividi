@@ -1,16 +1,11 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/", "destination": "/de", "permanent": false },
+    { "source": "/impressum", "destination": "/de/impressum", "permanent": false }
+  ],
   "headers": [
-    {
-      "source": "/(.*).(css|js)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=2592000, immutable"
-        }
-      ]
-    },
     {
       "source": "/(.*)",
       "headers": [

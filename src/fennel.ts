@@ -23,38 +23,38 @@ export interface FennelResult {
 
 // Example group, "Network 1"
 //~ export const exampleClass = [
-  //~ { id: 1, contacts: [15, 16] },
-  //~ { id: 2, contacts: [] },
-  //~ { id: 3, contacts: [5, 18] },
-  //~ { id: 4, contacts: [14, 19] },
-  //~ { id: 5, contacts: [3, 9] },
-  //~ { id: 6, contacts: [7, 17] },
-  //~ { id: 7, contacts: [4, 8, 14] },
-  //~ { id: 8, contacts: [14] },
-  //~ { id: 9, contacts: [5, 12, 20] },
-  //~ { id: 10, contacts: [9, 17] },
-  //~ { id: 11, contacts: [9, 12, 13, 20] },
-  //~ { id: 12, contacts: [9, 11, 13, 20] },
-  //~ { id: 13, contacts: [3, 11, 12, 18, 20] },
-  //~ { id: 14, contacts: [4, 19] },
-  //~ { id: 15, contacts: [16] },
-  //~ { id: 16, contacts: [1, 15] },
-  //~ { id: 17, contacts: [6, 9, 10, 14, 15] },
-  //~ { id: 18, contacts: [3, 5, 6, 13] },
-  //~ { id: 19, contacts: [4, 7, 12, 14] },
-  //~ { id: 20, contacts: [11, 13] },
+//~ { id: 1, contacts: [15, 16] },
+//~ { id: 2, contacts: [] },
+//~ { id: 3, contacts: [5, 18] },
+//~ { id: 4, contacts: [14, 19] },
+//~ { id: 5, contacts: [3, 9] },
+//~ { id: 6, contacts: [7, 17] },
+//~ { id: 7, contacts: [4, 8, 14] },
+//~ { id: 8, contacts: [14] },
+//~ { id: 9, contacts: [5, 12, 20] },
+//~ { id: 10, contacts: [9, 17] },
+//~ { id: 11, contacts: [9, 12, 13, 20] },
+//~ { id: 12, contacts: [9, 11, 13, 20] },
+//~ { id: 13, contacts: [3, 11, 12, 18, 20] },
+//~ { id: 14, contacts: [4, 19] },
+//~ { id: 15, contacts: [16] },
+//~ { id: 16, contacts: [1, 15] },
+//~ { id: 17, contacts: [6, 9, 10, 14, 15] },
+//~ { id: 18, contacts: [3, 5, 6, 13] },
+//~ { id: 19, contacts: [4, 7, 12, 14] },
+//~ { id: 20, contacts: [11, 13] },
 //~ ];
 
 // Example group, "Network 3"
 export const exampleClass = [
-  { id: 1, contacts: [4, 18 ,21] },
+  { id: 1, contacts: [4, 18, 21] },
   { id: 2, contacts: [14] },
   { id: 3, contacts: [9, 13, 22] },
   { id: 4, contacts: [18] },
   { id: 5, contacts: [] },
   { id: 6, contacts: [11] },
   { id: 7, contacts: [4] },
-  { id: 8, contacts: [19, 20 , 25] },
+  { id: 8, contacts: [19, 20, 25] },
   { id: 9, contacts: [3, 13, 22] },
   { id: 10, contacts: [17] },
   { id: 11, contacts: [6, 16, 17, 27] },
@@ -74,7 +74,7 @@ export const exampleClass = [
   { id: 25, contacts: [8, 19, 20, 22] },
   { id: 26, contacts: [4, 7, 8, 18, 20] },
   { id: 27, contacts: [1, 11, 17] },
-  { id: 28, contacts: [20] }
+  { id: 28, contacts: [20] },
 ];
 
 /**
@@ -82,10 +82,10 @@ export const exampleClass = [
  * clusters (groups) such that each cluster has roughly the same
  * number of vertices and the number of crossing edges (contacts)
  * is small. (Results are typically good, but no guarantees.)
- * 
+ *
  * @param array of students StudentInformation
  * @param FennelOptions
- * @returns FennelResult: partition is in cluster/element representation  
+ * @returns FennelResult: partition is in cluster/element representation
  */
 export function partitionClass(
   students: StudentInformation[],
@@ -115,15 +115,15 @@ export function partitionClass(
   const G = convertDirectedGraphToGraph(D); // O(n^2) operations
   console.log("Derived simple graph:");
   console.log(G);
-  
+
   // define weights
   const E: number[][] = G;
   const n: number = G.length;
   const V: number[] = new Array(n);
-  for (let v = 0; v < n; v++) V[v]=1;
-  
+  for (let v = 0; v < n; v++) V[v] = 1;
+
   // partition G
-  var R = partitionGraph(G, E, V, {k,nu}); // O(m) operations, most expensive step due to many iterations 
+  var R = partitionGraph(G, E, V, { k, nu }); // O(m) operations, most expensive step due to many iterations
   console.log(R);
   // compute cluster/element representation of partition (with change
   // of index +1)
@@ -139,7 +139,9 @@ export function partitionClass(
  * @param students double array of Persons GRP: adjacency lists of directed graph
  * @returns adjacency lists of (directed) graph
  */
-function convertClassToDirectedGraph(students: StudentInformation[]): number[][] {
+function convertClassToDirectedGraph(
+  students: StudentInformation[]
+): number[][] {
   // Running time: O(n+m)
   // Note input student ids are 1,...,n whereas output indices are
   // 0,...,n-1. Also, Students need not be sorted by id.
@@ -160,7 +162,7 @@ function convertClassToDirectedGraph(students: StudentInformation[]): number[][]
  * @returns double array of numbers E:
  * E[0]: list of vertices with a self-loop
  * E[1]: list of vertices with parallel edges
-*/
+ */
 function checkDirectedGraph(D: number[][]): number[][] {
   // Running time: O(n^2)
 
@@ -180,18 +182,17 @@ function checkDirectedGraph(D: number[][]): number[][] {
       M[v][w]++;
     }
   }
-  
-  
-  const E: number[][] = [[],[]];
+
+  const E: number[][] = [[], []];
   // Search for self-loops
   for (let v = 0; v < n; v++) {
     if (M[v][v] > 0) E[0].push(v);
-  }  
-  
+  }
+
   // Search for repeated edges
   for (let v = 0; v < n; v++) {
     for (let w = 0; w < n; w++) {
-      if (M[v][w] > 1) E[1].push(v); 
+      if (M[v][w] > 1) E[1].push(v);
     }
   }
 
@@ -242,7 +243,7 @@ function convertDirectedGraphToGraph(D: number[][]): number[][] {
  * clusters such that each cluster has roughly the same
  * number of vertices and the number of crossing edges
  * is small. (Results are typically good, but no guarantees.)
- * 
+ *
  * @param double array of numbers G: adjacency lists of a simple graph
  * @param double array of numbers E: edge weights
  * @param array of numbers V: vertex weights
@@ -253,7 +254,7 @@ export function partitionGraph(
   G: number[][],
   E: number[][],
   V: number[],
-  {k, nu}: FennelOptions = {}
+  { k, nu }: FennelOptions = {}
 ): FennelResult {
   // number of times we run Fennel
   const num_it = 10000;
@@ -261,10 +262,10 @@ export function partitionGraph(
   var n = G.length; // number of vertices
   var m = 0; // total weight of edges
   for (let v = 0; v < n; v++) {
-      const d = G[v].length;
-      // sum weights of edges to neighbours of v
-      for (let j = 0; j < d; j++) m += E[v][j];
-    }
+    const d = G[v].length;
+    // sum weights of edges to neighbours of v
+    for (let j = 0; j < d; j++) m += E[v][j];
+  }
   m /= 2; // need to account for doublecounting
   // P is an array whose entries are 0,...,n-1 in some permutation. We
   // will use P as a random ordering for Fennel

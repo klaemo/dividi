@@ -3,7 +3,7 @@
 Interested in contributing? We'd love your help!
 
 When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+email, or any other method with the owners of this repository before making a change.
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -11,7 +11,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 You will need to have [node.js](https://nodejs.org) installed on your machine to get started. The LTS version is recommended.
 
-## Initial setup
+## Initial Setup
 
 ```sh
 git clone https://github.com/klaemo/klassenteiler.git
@@ -19,17 +19,38 @@ cd klassenteiler
 npm install
 ```
 
+## Structure of the Projects
+
+We're using [Eleventy](https://www.11ty.dev) as a static site generator for the website and [tailwindcss](https://tailwindcss.com) for styling.
+The Dividi JavaScript app is built with preact.
+
+- `site`: the templates and contents of the website
+  - there are subdirectories for each language (for example `site/de` or `site/en`)
+  - `site/_data/app_messages.json` contains the translations for the Dividi app
+- `src`: the source code of the Dividi JavaScript app
+
+## Adding a Translation
+
+Initialize the new language with the provided script (it takes a language code as the parameter):
+
+```sh
+./scripts/add-language.js fr
+```
+
+This will generate the necessary skeleton in the `site` directory for you. You can now start translating!
+
 ## Pull Request Process
 
 Checkout a topic branch from the base branch `main` and merge back against that branch.
 
 Some tips for creating your first pull request:
+
 - Provide background for why a PR was created.
 - Link to any relevant issues, discussions, or past PRs.
-- Update the README.md with details of changes to the interface, this includes new environment 
-   variables, exposed ports, useful file locations and container parameters.
-- You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
-   do not have permission to do that, you may request the second reviewer to merge it for you.
+- Update the README.md with details of changes to the interface, this includes new environment
+  variables, exposed ports, useful file locations and container parameters.
+- You may merge the Pull Request in once you have the sign-off of two other developers, or if you
+  do not have permission to do that, you may request the second reviewer to merge it for you.
 
 ## Code of Conduct
 
@@ -47,21 +68,21 @@ orientation.
 Examples of behavior that contributes to creating a positive environment
 include:
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+- Using welcoming and inclusive language
+- Being respectful of differing viewpoints and experiences
+- Gracefully accepting constructive criticism
+- Focusing on what is best for the community
+- Showing empathy towards other community members
 
 Examples of unacceptable behavior by participants include:
 
-* The use of sexualized language or imagery and unwelcome sexual attention or
-advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic
+- The use of sexualized language or imagery and unwelcome sexual attention or
+  advances
+- Trolling, insulting/derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others' private information, such as a physical or electronic
   address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a
+- Other conduct which could reasonably be considered inappropriate in a
   professional setting
 
 ### Our Responsibilities

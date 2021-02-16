@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ page_description }}" />
+
+    {% for item in i18n.enabled_languages %}
+      <link rel="alternate" hreflang="{{ item.code }}" href="/{{ item.code }}" />
+    {% endfor %}
+
+    <link rel="stylesheet" href="/dist/index.css" />
+
+    <script
+      async="async"
+      defer="defer"
+      data-domain="dividi.app"
+      src="https://stats.dividi.app/js/index.js"
+    ></script>
+  </head>
+
+  <body class="flex flex-col min-h-screen bg-white text-gray-900">
+    <div class="flex absolute top-0 right-3">
+      {% for item in i18n.enabled_languages %}
+        <a href="/{{ item.code }}" class="px-2 py-2">{{ item.icon }}</a>
+      {% endfor %}
+    </div>
+
+    <main class="flex-grow">
+      <header
+        class="bg-gradient-to-b from-indigo-200 to-white flex justify-center"
+      >
+        <div
+          class="w-full max-w-screen-xl border-indigo-200 px-4 py-10 lg:py-14"
+        >
+          <h1
+            class="text-center text-4xl sm:text-5xl md:text-6xl tracking-tight font-extrabold text-gray-900"
+          >
+            {{ header.title }}
+          </h1>
+          <p
+            class="mt-5 md:mt-10 text-base text-center text-gray-600 md:text-xl max-w-xl mx-auto"
+          >
+            {{ header.description }}
+          </p>
+          <div class="mt-5 md:mt-10 sm:flex justify-center mx-auto">
+            <a
+              href="#teiler"
+              class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-white hover:text-white bg-indigo-600 hover:bg-indigo-700 shadow"
+              >{{ header.button_start }}</a
+            >
+            <a
+              href="#faq"
+              class="flex items-center justify-center px-8 py-3 rounded-md text-base font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200 shadow mt-3 sm:mt-0 sm:ml-3"
+              >{{ header.button_more }}</a
+            >
+          </div>
+        </div>
+      </header>
+
+      <section id="teiler" class="mx-auto max-w-screen-xl py-10 lg:py-14 px-4">
+        <h2
+          class="mb-5 md:mb-10 font-bold text-2xl sm:text-3xl tracking-tighter text-center"
+        >
+          {{ explanation.title }}
+        </h2>
+        <ol
+          class="lg:grid lg:grid-cols-3 lg:gap-16 lg:mb-10 text-center mx-auto max-w-prose lg:max-w-screen-lg"
+        >
+          {% for item in explanation.steps %}
+          <li class="mb-6 lg:mb-0">
+            <h3 class="font-bold text-xl mb-2 text-indigo-700">
+              {{ item.title }}
+            </h3>
+            {{ item.text | safe }}
+          </li>
+          {% endfor %}
+        </ol>
+
+        <p class="max-w-prose text-center mx-auto">
+          {{ explanation.aside | safe }}
+        </p>
+      </section>
+
+      <section class="pb-10 lg:pb-14 px-4" id="klassenteiler-app"></section>
+
+      <section
+        id="faq"
+        class="explainer mx-auto max-w-screen-xl py-10 lg:py-14 px-4"
+      >
+        <h2 class="mb-3 font-bold text-3xl tracking-tighter">
+          {{ faq.title }}
+        </h2>
+
+        <div class="max-w-prose">
+          {% for item in collections["faq_" + lang] | order %}
+          <details>
+            <summary>{{ item.data.title }}</summary>
+            {{ item.templateContent | safe }}
+          </details>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer bg-gray-50 border-t border-gray-200 text-sm">
+      <div
+        class="flex justify-center flex-wrap mx-auto max-w-screen-xl px-4 py-2"
+      >
+        {% for item in collections["footer_" + lang] %}
+          <a class="m-4" href="{{ item.url }}">{{ item.data.title }}</a>
+        {% endfor %}
+        <a
+          class="m-4"
+          href="https://github.com/klaemo/dividi"
+          target="_blank"
+          rel="noopener"
+          >Source Code</a
+        >
+      </div>
+    </footer>
+
+    <script type="application/json" id="app-messages">
+      {{ app_messages[lang] | dump | safe }}
+    </script>
+    <script type="module" src="/dist/index.js"></script>
+  </body>
+</html>

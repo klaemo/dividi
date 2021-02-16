@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="{{ page_description }}"
+    />
+    <title>{{ page_title }}</title>
+
+    {% for item in i18n.enabled_languages %}
+      <link rel="alternate" hreflang="{{ item.code }}" href="/{{ item.code }}/{{ page.fileSlug }}" />
+    {% endfor %}
+
+    <link rel="stylesheet" href="/dist/index.css" />
+    <script
+      async
+      defer
+      data-domain="dividi.app"
+      src="https://stats.dividi.app/js/index.js"
+    ></script>
+  </head>
+
+  <body class="py-16 px-5 text-gray-900">
+    <article class="prose mx-auto">
+      {{ content | safe }}
+    </article>
+  </body>
+</html>

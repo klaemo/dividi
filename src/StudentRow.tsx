@@ -59,7 +59,7 @@ export function StudentRow({
                   const newContacts = [...contacts];
                   newContacts.splice(index, 1);
                   onChange(newContacts);
-                  return
+                  return;
                 }
 
                 if (

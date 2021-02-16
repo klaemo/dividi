@@ -1,0 +1,12 @@
+{
+  "enabled_languages": [
+    {
+      "code": "de",
+      "icon": "🇩🇪"
+    },
+    {
+      "code": "en",
+      "icon": "🇬🇧"
+    }
+  ]
+}
